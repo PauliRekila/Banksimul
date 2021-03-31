@@ -59,4 +59,15 @@ function(request, response) {
   });
 });
 
+router.post('/uusi_tapahtuma', 
+function(request, response) {
+  kortti.uusi_tapahtuma(request.body, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(request.body);
+    }
+  });
+});
+
 module.exports = router;
