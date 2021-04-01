@@ -65,7 +65,7 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <pointsize>15</pointsize>
           </font>
          </property>
          <property name="text">
@@ -90,7 +90,7 @@ Saldo</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <pointsize>15</pointsize>
           </font>
          </property>
          <property name="text">
@@ -115,7 +115,7 @@ Tilitapahtumia</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <pointsize>15</pointsize>
           </font>
          </property>
          <property name="text">
@@ -140,7 +140,7 @@ Rahaa</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <pointsize>15</pointsize>
           </font>
          </property>
          <property name="text">

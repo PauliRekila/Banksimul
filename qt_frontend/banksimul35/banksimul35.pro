@@ -10,24 +10,33 @@ CONFIG += c++11
 
 SOURCES += \
     dllmanagement.cpp \
+    ilmoitus.cpp \
     main.cpp \
     mainwindow.cpp \
     menu.cpp \
+    nosto.cpp \
     pin.cpp \
-    saldo.cpp
+    saldo.cpp \
+    tapahtumat.cpp
 
 HEADERS += \
     dllmanagement.h \
+    ilmoitus.h \
     mainwindow.h \
     menu.h \
+    nosto.h \
     pin.h \
-    saldo.h
+    saldo.h \
+    tapahtumat.h
 
 FORMS += \
+    ilmoitus.ui \
     mainwindow.ui \
     menu.ui \
+    nosto.ui \
     pin.ui \
-    saldo.ui
+    saldo.ui \
+    tapahtumat.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
