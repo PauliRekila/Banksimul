@@ -12,16 +12,22 @@ SOURCES += \
     dllmanagement.cpp \
     main.cpp \
     mainwindow.cpp \
-    pin.cpp
+    menu.cpp \
+    pin.cpp \
+    saldo.cpp
 
 HEADERS += \
     dllmanagement.h \
     mainwindow.h \
-    pin.h
+    menu.h \
+    pin.h \
+    saldo.h
 
 FORMS += \
     mainwindow.ui \
-    pin.ui
+    menu.ui \
+    pin.ui \
+    saldo.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
