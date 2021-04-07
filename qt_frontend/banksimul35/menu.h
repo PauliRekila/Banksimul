@@ -12,9 +12,9 @@ class menu : public QDialog
     Q_OBJECT
 
 public:
-    explicit menu(QWidget *parent = nullptr);
+    menu(QWidget *parent = nullptr);
     ~menu();
-
+    void menuName(QString);
 private:
     Ui::menu *ui;
 };
