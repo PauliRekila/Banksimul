@@ -3,8 +3,8 @@
 Dllrestapi::Dllrestapi(QObject *parent) : QObject(parent)
 {
     pEngineRest = new engineRest;
-    connect(pEngineRest, SIGNAL(signalToInterface(QString)),
-            this, SLOT(receiveSignalFromEngine(QString)));
+    connect(pEngineRest, SIGNAL(sendToInterface(QNetworkReply*)),
+            this, SLOT(receiveSignalFromEngine(QNetworkReply*)));
 }
 
 Dllrestapi::~Dllrestapi()
@@ -13,7 +13,7 @@ Dllrestapi::~Dllrestapi()
     pEngineRest = nullptr;
 }
 
-void Dllrestapi::receiveSignalFromEngine(QString info)
+void Dllrestapi::receiveSignalFromEngine(QNetworkReply* info)
 {
     emit sendToExe(info);
 }

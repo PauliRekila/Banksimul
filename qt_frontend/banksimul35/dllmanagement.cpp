@@ -1,10 +1,12 @@
 #include "dllmanagement.h"
+#include "dllrestapi.h"
 
 dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
 {
-    pEngineRest = new engineRest;
+  //  pEngineRest = new engineRest;
+    pInterfaceRest = new Dllrestapi;
     pMenu = new menu;
-    connect(pEngineRest, SIGNAL(sendToExe(QString)),
+    connect(pInterfaceRest, SIGNAL(sendToExe(QNetworkReply*)),
             this, SLOT(getAsiakasSlot(QNetworkReply*reply)));
 }
 
@@ -29,5 +31,5 @@ void dllmanagement::getAsiakasSlot(QNetworkReply *reply)
     qDebug()<<asiakas;
     pMenu->menuName(asiakas);
     reply->deleteLater();
-    pEngineRest->manager->deleteLater();
+  //  pEngineRest->manager->deleteLater();
 }

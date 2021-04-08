@@ -14,9 +14,10 @@ public:
 private:
     engineRest * pEngineRest;
 signals:
-    void sendToExe(QString);
+    void sendToExe(QNetworkReply*);
 public slots:
-    void receiveSignalFromEngine(QString);
+    void receiveSignalFromEngine(QNetworkReply*);
+
 
 };
 

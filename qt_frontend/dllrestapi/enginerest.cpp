@@ -24,5 +24,9 @@ void engineRest::tiedot(int idasiakas)
     this, SLOT(signalToInterface(QNetworkReply*)));
     reply = manager->get(request);
 }
+void engineRest::signalToInterface(QNetworkReply* reply2)
+{
+    emit sendToInterface(reply2);
+}
 
 

@@ -9,6 +9,7 @@
 #include <QNetworkReply>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QJsonDocument>
 
 class engineRest : public QObject
 {
@@ -17,13 +18,15 @@ public:
     engineRest(QObject *parent = nullptr);
     ~engineRest();
     void tiedot(int idasiakas);
+private:
     QNetworkAccessManager *manager;
     QNetworkReply *reply;
+public slots:
 
-private slots:
 
 signals:
-    void signalToInterface(QString);
+    void signalToInterface(QNetworkReply*);
+    void sendToInterface(QNetworkReply*);
 };
 
 #endif // ENGINEREST_H

@@ -4,6 +4,7 @@
 #include <QObject>
 #include "dllrestapi.h"
 #include "menu.h"
+//#include "enginerest.h"
 
 class dllmanagement : public QObject
 {
@@ -13,6 +14,7 @@ public:
     ~dllmanagement();
 private:
     engineRest *pEngineRest;
+    Dllrestapi *pInterfaceRest;
     menu *pMenu;
 public slots:
     void getAsiakasSlot(QNetworkReply *reply);
