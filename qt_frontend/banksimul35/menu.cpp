@@ -12,3 +12,8 @@ menu::~menu()
 {
     delete ui;
 }
+
+void menu::tervetuloaAsiakas(QString asiakas)
+{
+    ui->label_menu->setText("Tervetuloa, "+asiakas);
+}
