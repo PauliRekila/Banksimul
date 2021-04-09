@@ -2,9 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "menu.h"
-#include <QDialog>
-#include "dllmanagement.h"
+#include "dllrestapi.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,12 +16,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-    void on_pushButton_clicked();
-
 private:
     Ui::MainWindow *ui;
-    menu *pmenu;
-    dllmanagement *pdllm;
+    Dllrestapi *pdllrest;
+public slots:
+    void receiveSignalFromInterface(QString);
+private slots:
+    void on_pushButton_clicked();
 };
 #endif // MAINWINDOW_H

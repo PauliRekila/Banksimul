@@ -14,6 +14,7 @@ class menu : public QDialog
 public:
     explicit menu(QWidget *parent = nullptr);
     ~menu();
+    void tervetuloaAsiakas(QString);
 
 private:
     Ui::menu *ui;
