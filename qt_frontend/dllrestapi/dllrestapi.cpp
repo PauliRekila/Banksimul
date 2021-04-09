@@ -3,8 +3,8 @@
 Dllrestapi::Dllrestapi(QObject *parent) : QObject(parent)
 {
     penginerest = new enginerest;
-    connect(penginerest, SIGNAL(sendSignalToInterface(QString)),
-            this, SLOT(receiveSignalFromEngine(QString)));
+    connect(penginerest, SIGNAL(sendSignalToInterface(QNetworkReply*)),
+            this, SLOT(receiveSignalFromEngine(QNetworkReply*)));
 }
 
 Dllrestapi::~Dllrestapi()
@@ -23,5 +23,5 @@ void Dllrestapi::receiveSignalFromEngine(QNetworkReply* reply)
 {
     emit sendSignalToExe(reply);
     qDebug() << "interfacesta lähetetty signaali";
-    qDebug() << reply;
+    qDebug() << reply << "interface";
 }

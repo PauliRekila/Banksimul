@@ -44,7 +44,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_1_MinGW_32_bit-Debug/debug/ -ldllrestapi
+win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/debug/ -ldllrestapi
 
 INCLUDEPATH += $$PWD/../dllrestapi
 DEPENDPATH += $$PWD/../dllrestapi

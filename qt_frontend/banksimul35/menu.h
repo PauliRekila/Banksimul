@@ -2,6 +2,7 @@
 #define MENU_H
 
 #include <QDialog>
+#include <QDebug>
 
 namespace Ui {
 class menu;
@@ -15,7 +16,6 @@ public:
     explicit menu(QWidget *parent = nullptr);
     ~menu();
     void tervetuloaAsiakas(QString);
-
 private:
     Ui::menu *ui;
 };
