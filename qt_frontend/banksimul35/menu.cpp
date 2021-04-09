@@ -15,5 +15,8 @@ menu::~menu()
 
 void menu::tervetuloaAsiakas(QString asiakas)
 {
-    ui->label_menu->setText("Tervetuloa, "+asiakas);
+    ui->label_menu->setText("Tervetuloa, " + asiakas);
+    this->exec();
+    this->show();
+    this->close();
 }

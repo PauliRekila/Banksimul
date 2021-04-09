@@ -21,10 +21,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    pmenu = new menu(this);
-    pmenu->show();
-    pmenu->exec();
     pdllm->getAsiakasNimi();
-    delete pmenu;
-    pmenu = nullptr;
 }

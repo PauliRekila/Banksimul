@@ -15,7 +15,7 @@ void enginerest::tiedot(QString info)
     QString headerData = "Basic " + data;
     request.setRawHeader( "Authorization", headerData.toLocal8Bit() );
     manager = new QNetworkAccessManager(this);
-    connect(manager, SIGNAL(finished (QNetworkReply*)),
+    connect(manager, SIGNAL(finished(QNetworkReply*)),
     this, SLOT(receiveNetworkReply(QNetworkReply*)));
     reply = manager->get(request);
 }
@@ -23,4 +23,5 @@ void enginerest::tiedot(QString info)
 void enginerest::receiveNetworkReply(QNetworkReply *reply)
 {
     emit sendSignalToInterface(reply);
+    qDebug() << reply;
 }

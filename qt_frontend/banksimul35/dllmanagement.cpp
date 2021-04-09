@@ -25,13 +25,10 @@ void dllmanagement::receiveSignalFromRestapi(QNetworkReply *reply)
 {
     QByteArray response_data=reply->readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
-    QJsonArray json_array = json_doc.array();
-
-    foreach (const QJsonValue &value, json_array) {
-    QJsonObject json_obj = value.toObject();
-    asiakas=json_obj["enimi"].toString()+" "+json_obj["snimi"].toString()+"\r";
-    }
-    qDebug()<<asiakas;
+    QJsonObject json_obj = json_doc.object();
+    QString asiakas;
+    asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
+    qDebug() << asiakas;
     pmenu->tervetuloaAsiakas(asiakas);
     reply->deleteLater();
     //manager->deleteLater();

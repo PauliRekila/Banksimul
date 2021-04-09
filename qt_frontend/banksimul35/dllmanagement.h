@@ -11,7 +11,6 @@ class dllmanagement : public QObject
 public:
     dllmanagement(QObject *parent = nullptr);
     ~dllmanagement();
-    QString asiakas;
     void getAsiakasNimi();
 private:
     Dllrestapi *pDllrestapi;
