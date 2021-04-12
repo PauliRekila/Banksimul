@@ -1,7 +1,11 @@
 #ifndef PINKYSELY_H
 #define PINKYSELY_H
 
-#include "pindll.h"
+#include <QDebug>
+#include <QObject>
+#include <QDialog>
+#include <QLineEdit>
+#include <QTimer>
 
 namespace Ui {
 class pinkysely;
@@ -14,9 +18,8 @@ class pinkysely : public QDialog
 public:
     pinkysely(QWidget *parent = nullptr);
     ~pinkysely();
-
-private:
-    Pindll * ppindll;
+    void testiDialogi2();
+    void lopeta();
 
 private slots:
     void on_b1_clicked();
@@ -45,6 +48,7 @@ private slots:
 
 private:
     Ui::pinkysely *ui;
+    QTimer *timer;
 };
 
 #endif // PINKYSELY_H

@@ -16,7 +16,6 @@ SOURCES += \
     mainwindow.cpp \
     menu.cpp \
     nosto.cpp \
-    pin.cpp \
     saldo.cpp \
     tapahtumat.cpp
 
@@ -26,7 +25,6 @@ HEADERS += \
     mainwindow.h \
     menu.h \
     nosto.h \
-    pin.h \
     saldo.h \
     tapahtumat.h
 
@@ -35,7 +33,6 @@ FORMS += \
     mainwindow.ui \
     menu.ui \
     nosto.ui \
-    pin.ui \
     saldo.ui \
     tapahtumat.ui
 
@@ -48,3 +45,8 @@ win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/
 
 INCLUDEPATH += $$PWD/../dllrestapi
 DEPENDPATH += $$PWD/../dllrestapi
+
+win32: LIBS += -L$$PWD/../build-pindll-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/debug/ -lpindll
+
+INCLUDEPATH += $$PWD/../pindll
+DEPENDPATH += $$PWD/../pindll
