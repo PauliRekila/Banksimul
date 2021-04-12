@@ -1,3 +1,6 @@
 node_modules/
 qt_frontend/build*
 qt_frontend/banksimul35/banksimul35.pro.user
+qt_frontend/banksimul35/dllrestapi/dllrestapi.pro.user
+qt_frontend/banksimul35/dllserialport/dllserialport.pro.user
+qt_frontend/banksimul35/pindll/pindll.pro.user
