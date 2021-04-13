@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include "dllrestapi.h"
+#include "pindll.h"
 #include "menu.h"
+#include "dllserialport.h"
 
 class dllmanagement : public QObject
 {
@@ -14,10 +16,15 @@ public:
     void getAsiakasNimi();
 private:
     Dllrestapi *pDllrestapi;
+    Pindll *ppindll;
     menu *pmenu;
+    Dllserialport *pserialport;
+
 signals:
 public slots:
     void receiveSignalFromRestapi(QNetworkReply*);
+    void receiveSignalFromPindll(short);
+    void receiveSignalFromRFID(QString);
 
 };
 

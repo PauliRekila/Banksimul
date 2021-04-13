@@ -17,11 +17,13 @@ Dllserialport::~Dllserialport()
 void Dllserialport::openReadClose()
 {
     pEngine->open();
+
+
 }
 
 void Dllserialport::readPortInfo()
 {
-    pEngine->info();
+   // pEngine->info();
 }
 
 void Dllserialport::receiveSignalFromEngine(QString info)

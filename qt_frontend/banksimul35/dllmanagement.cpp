@@ -3,15 +3,29 @@
 dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
 {
     pDllrestapi = new Dllrestapi;
+    ppindll = new Pindll;
     pmenu = new menu;
+    pserialport = new Dllserialport;
+
     connect(pDllrestapi, SIGNAL(sendSignalToExe(QNetworkReply*)),
             this, SLOT(receiveSignalFromRestapi(QNetworkReply*)));
+
+    connect(ppindll, SIGNAL(sendSignalToExe(short)),
+            this, SLOT(receiveSignalFromPindll(short)));
+
+    connect(pserialport, SIGNAL(sendInfoToExe(QString)),
+            this, SLOT(receiveSignalFromRFID(QString)));
+
 }
 
 dllmanagement::~dllmanagement()
 {
     delete pDllrestapi;
     pDllrestapi = nullptr;
+    delete ppindll;
+    ppindll = nullptr;
+    delete pserialport;
+    pserialport = nullptr;
     delete pmenu;
     pmenu = nullptr;
 }
@@ -32,4 +46,15 @@ void dllmanagement::receiveSignalFromRestapi(QNetworkReply *reply)
     pmenu->tervetuloaAsiakas(asiakas);
     reply->deleteLater();
     //manager->deleteLater();
+}
+
+void dllmanagement::receiveSignalFromPindll(short pin)
+{
+    qDebug() << "Signaali saatu pindll:stä exeen!" << pin;
+}
+
+void dllmanagement::receiveSignalFromRFID(QString info)
+{
+    qDebug() << info;
+    ppindll->testDialog();
 }

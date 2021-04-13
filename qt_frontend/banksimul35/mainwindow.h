@@ -23,7 +23,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    menu *pmenu;
+    // menu *pmenu;
+    Pindll *ppindll;
     dllmanagement *pdllm;
+    Dllserialport *prfid;
 };
 #endif // MAINWINDOW_H

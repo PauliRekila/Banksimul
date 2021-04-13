@@ -4,8 +4,10 @@ engine::engine(QObject *parent) : QObject(parent)
 {
     pQSerialPort = new QSerialPort;
     pQSerialPortInfo = new QSerialPortInfo;
-}
+    connect(pQSerialPort, SIGNAL(readyRead()),
+            this, SLOT(info()));
 
+}
 engine::~engine()
 {
     delete pQSerialPort;
@@ -17,14 +19,14 @@ engine::~engine()
 
 void engine::open()
 {
-    pQSerialPort->setPortName("COM52");
+    pQSerialPort->setPortName("COM3");
     qDebug() << pQSerialPort->portName();
     pQSerialPort->setBaudRate(9600);
     pQSerialPort->setDataBits(QSerialPort::Data8);
     pQSerialPort->setParity(QSerialPort::NoParity);
     pQSerialPort->setStopBits(QSerialPort::OneStop);
-  //pQSerialPort->setFlowControl(QSerialPort::NoFlowControl);
-    pQSerialPort->setFlowControl(QSerialPort::HardwareControl);
+    pQSerialPort->setFlowControl(QSerialPort::NoFlowControl);
+   // pQSerialPort->setFlowControl(QSerialPort::HardwareControl);
 
     if (!pQSerialPort->open(QIODevice::ReadWrite))
     {
@@ -33,8 +35,13 @@ void engine::open()
 
     else
     {
+
+        QByteArray data = pQSerialPort->readAll();
+        qDebug() << data;
         qDebug() << "Portti aukesi" << Qt::endl;
-        qDebug() << pQSerialPort->readAll();
+        qDebug() << pQSerialPort->readAll() << "testi";
+
+
     }
 
     qDebug() << "Suljetaan lopuksi";
@@ -43,11 +50,7 @@ void engine::open()
 
 void engine::info()
 {
-    QList<QSerialPortInfo> ports = pQSerialPortInfo->availablePorts();
+    QByteArray data = pQSerialPort->readAll();
 
-    foreach(QSerialPortInfo info, ports)
-    {
-        emit signalToInterface(info.portName());
-        emit signalToInterface(info.manufacturer());
-    }
+    qDebug() << data;
 }

@@ -1,5 +1,7 @@
 QT       += core gui
 QT += network
+QT += serialport
+QT += core
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,7 +18,6 @@ SOURCES += \
     mainwindow.cpp \
     menu.cpp \
     nosto.cpp \
-    pin.cpp \
     saldo.cpp \
     tapahtumat.cpp
 
@@ -26,7 +27,6 @@ HEADERS += \
     mainwindow.h \
     menu.h \
     nosto.h \
-    pin.h \
     saldo.h \
     tapahtumat.h
 
@@ -35,7 +35,6 @@ FORMS += \
     mainwindow.ui \
     menu.ui \
     nosto.ui \
-    pin.ui \
     saldo.ui \
     tapahtumat.ui
 
@@ -44,7 +43,19 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/debug/ -ldllrestapi
+
+
+win32: LIBS += -L$$PWD/../build-dllserialport-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -ldllserialport
+
+INCLUDEPATH += $$PWD/../dllserialport
+DEPENDPATH += $$PWD/../dllserialport
+
+win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -ldllrestapi
 
 INCLUDEPATH += $$PWD/../dllrestapi
 DEPENDPATH += $$PWD/../dllrestapi
+
+win32: LIBS += -L$$PWD/../build-pindll-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -lpindll
+
+INCLUDEPATH += $$PWD/../pindll
+DEPENDPATH += $$PWD/../pindll
