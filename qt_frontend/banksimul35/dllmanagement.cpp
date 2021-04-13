@@ -3,15 +3,21 @@
 dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
 {
     pDllrestapi = new Dllrestapi;
+    ppindll = new Pindll;
     pmenu = new menu;
     connect(pDllrestapi, SIGNAL(sendSignalToExe(QNetworkReply*)),
             this, SLOT(receiveSignalFromRestapi(QNetworkReply*)));
+
+    connect(ppindll, SIGNAL(sendSignalToExe(short)),
+            this, SLOT(receiveSignalFromPindll(short)));
 }
 
 dllmanagement::~dllmanagement()
 {
     delete pDllrestapi;
     pDllrestapi = nullptr;
+    delete ppindll;
+    ppindll = nullptr;
     delete pmenu;
     pmenu = nullptr;
 }
@@ -32,4 +38,9 @@ void dllmanagement::receiveSignalFromRestapi(QNetworkReply *reply)
     pmenu->tervetuloaAsiakas(asiakas);
     reply->deleteLater();
     //manager->deleteLater();
+}
+
+void dllmanagement::receiveSignalFromPindll(short pin)
+{
+    qDebug() << "Signaali saatu pindll:stä exeen!" << pin;
 }

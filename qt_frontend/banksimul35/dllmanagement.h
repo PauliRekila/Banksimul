@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "dllrestapi.h"
+#include "pindll.h"
 #include "menu.h"
 
 class dllmanagement : public QObject
@@ -14,10 +15,12 @@ public:
     void getAsiakasNimi();
 private:
     Dllrestapi *pDllrestapi;
+    Pindll *ppindll;
     menu *pmenu;
 signals:
 public slots:
     void receiveSignalFromRestapi(QNetworkReply*);
+    void receiveSignalFromPindll(short);
 
 };
 
