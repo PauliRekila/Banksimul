@@ -6,11 +6,17 @@ menu::menu(QWidget *parent) :
     ui(new Ui::menu)
 {
     ui->setupUi(this);
+    timer = new QTimer(this);
+
+    connect(timer, &QTimer::timeout,
+            this, QOverload<>::of(&menu::lopeta));
 }
 
 menu::~menu()
 {
     delete ui;
+    delete timer;
+    timer = nullptr;
 }
 
 void menu::tervetuloaAsiakas(QString asiakas)
@@ -19,4 +25,11 @@ void menu::tervetuloaAsiakas(QString asiakas)
     this->exec();
     this->show();
     this->close();
+}
+
+void menu::lopeta()
+{
+    qDebug() << "Aika loppui";
+    this->close();
+    timer->stop();
 }

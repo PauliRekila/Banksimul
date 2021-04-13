@@ -5,6 +5,8 @@
 #include "menu.h"
 #include <QDialog>
 #include "dllmanagement.h"
+#include <QTimer>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,7 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    void lopeta();
 private slots:
     void on_pushButton_clicked();
 
@@ -26,5 +28,6 @@ private:
     // menu *pmenu;
     Pindll *ppindll;
     dllmanagement *pdllm;
+    QTimer *timer;
 };
 #endif // MAINWINDOW_H

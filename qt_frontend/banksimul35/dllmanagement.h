@@ -5,6 +5,7 @@
 #include "dllrestapi.h"
 #include "pindll.h"
 #include "menu.h"
+#include <QTimer>
 
 class dllmanagement : public QObject
 {
