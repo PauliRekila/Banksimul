@@ -10,6 +10,7 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
 
     connect(ppindll, SIGNAL(sendSignalToExe(short)),
             this, SLOT(receiveSignalFromPindll(short)));
+
 }
 
 dllmanagement::~dllmanagement()

@@ -2,6 +2,8 @@
 #define ILMOITUS_H
 
 #include <QDialog>
+#include <QTimer>
+#include <QDebug>
 
 namespace Ui {
 class ilmoitus;
@@ -14,8 +16,10 @@ class ilmoitus : public QDialog
 public:
     explicit ilmoitus(QWidget *parent = nullptr);
     ~ilmoitus();
+    void lopeta();
 
 private:
+    QTimer *timer;
     Ui::ilmoitus *ui;
 };
 
