@@ -8,6 +8,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QIODevice>
+#include <QTimer>
 
 
 class engine : public QObject
@@ -24,6 +25,7 @@ private:
 
 signals:
     void signalToInterface(QString);
+    void errToInterface();
 
 };
 

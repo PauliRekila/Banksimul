@@ -15,16 +15,8 @@ engine::engine(QObject *parent) : QObject(parent)
     pQSerialPort->setParity(QSerialPort::NoParity);
     pQSerialPort->setStopBits(QSerialPort::OneStop);
     pQSerialPort->setFlowControl(QSerialPort::NoFlowControl);
-
-    if (pQSerialPort->open(QIODevice::ReadWrite))
-    {
-        qDebug() << "Portti aukesi" << Qt::endl;
-    }
-
-    else
-    {
-        qDebug() << "Ei aukea" << Qt::endl;
-    }
+    //pQSerialPort->setFlowControl(QSerialPort::HardwareControl);
+    pQSerialPort->open(QIODevice::ReadWrite);
 
     qDebug() << "engine luotu";
 }
@@ -37,12 +29,21 @@ engine::~engine()
 
 void engine::readData()
 {
+
     QString data = "";
     data = pQSerialPort->readAll();
     data.remove(0,4);
     data.chop(3);
+    if (data.length() >=10)
+    {
+        qDebug() << "lukuvirhe";
+        emit errToInterface();
+    }
+    else
+    {
     qDebug() << data;
     pQSerialPort->close();
     qDebug() << "Suljetaan lopuksi";
     emit signalToInterface(data);
+    }
 }
