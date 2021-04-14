@@ -16,12 +16,11 @@ class engine : public QObject
 public:
     explicit engine(QObject *parent = nullptr);
     ~engine();
-    void open();
+
 public slots:
-    void info();
+    void readData();
 private:
-    QSerialPort * pQSerialPort;
-    QSerialPortInfo * pQSerialPortInfo;
+    QSerialPort * pQSerialPort;    
 
 signals:
     void signalToInterface(QString);
