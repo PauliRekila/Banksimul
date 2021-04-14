@@ -7,6 +7,7 @@
 #include "dllmanagement.h"
 #include <QTimer>
 #include <QDebug>
+#include "dllserialport.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,14 +21,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void lopeta();
+    void kirjauduUlos();
 private slots:
     void on_pushButton_clicked();
-
+public slots:
+    void receiveDataFromSerial(QString);
+    void receiveErrFromSerial();
 private:
     Ui::MainWindow *ui;
     // menu *pmenu;
     Pindll *ppindll;
     dllmanagement *pdllm;
     QTimer *timer;
+    Dllserialport *prfid;
+
 };
 #endif // MAINWINDOW_H

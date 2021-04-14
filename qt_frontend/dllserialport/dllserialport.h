@@ -14,9 +14,11 @@ public:
 private:
     engine * pEngine;
 signals:
-    void sendInfoToExe(QString);
+    void sendDataToExe(QString);
+    void sendErrToExe();
 public slots:
     void receiveSignalFromEngine(QString);
+    void receiveErrFromEngine();
 };
 
 #endif // DLLSERIALPORT_H

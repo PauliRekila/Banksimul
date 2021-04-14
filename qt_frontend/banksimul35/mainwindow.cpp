@@ -8,12 +8,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     // pdllm = new dllmanagement;
-    ppindll = new Pindll;
+    ppindll = new Pindll;    
     //QMainWindow::showFullScreen();
     timer = new QTimer(this);
+    kirjauduUlos();
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&MainWindow::lopeta));
+    connect(prfid, SIGNAL(sendDataToExe(QString)),
+            this, SLOT(receiveDataFromSerial(QString)));
+    connect(prfid, SIGNAL(sendErrToExe()),
+            this, SLOT(receiveErrFromSerial()));
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +32,10 @@ MainWindow::~MainWindow()
 
     delete ppindll;
     ppindll = nullptr;
+
+    delete prfid;
+    prfid = nullptr;
+
 }
 
 void MainWindow::lopeta()
@@ -36,9 +45,28 @@ void MainWindow::lopeta()
     timer->stop();
 }
 
+void MainWindow::kirjauduUlos()
+{
+    prfid = new Dllserialport;
+
+}
+
 
 void MainWindow::on_pushButton_clicked()
 {
     // pdllm->getAsiakasNimi();
-    ppindll->testDialog();
+    //ppindll->testDialog();
+}
+
+void MainWindow::receiveDataFromSerial(QString)
+{
+    delete prfid;
+    prfid = nullptr;
+}
+
+void MainWindow::receiveErrFromSerial()
+{
+    delete prfid;
+    prfid = nullptr;
+    kirjauduUlos();
 }
