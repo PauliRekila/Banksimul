@@ -3,9 +3,9 @@
 Dllserialport::Dllserialport(QObject *parent) : QObject(parent)
 {
     pEngine = new engine;
-
     connect(pEngine, SIGNAL(signalToInterface(QString)),
             this, SLOT(receiveSignalFromEngine(QString)));
+    qDebug() << "interface luotu";
 }
 
 Dllserialport::~Dllserialport()
@@ -14,17 +14,8 @@ Dllserialport::~Dllserialport()
     pEngine = nullptr;
 }
 
-void Dllserialport::openReadClose()
-{
-    pEngine->open();
-}
 
-void Dllserialport::readPortInfo()
+void Dllserialport::receiveSignalFromEngine(QString data)
 {
-    pEngine->info();
-}
-
-void Dllserialport::receiveSignalFromEngine(QString info)
-{
-    emit sendInfoToExe(info);
+    emit sendInfoToExe(data);
 }

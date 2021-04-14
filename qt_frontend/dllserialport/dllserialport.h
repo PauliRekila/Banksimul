@@ -9,10 +9,8 @@ class DLLSERIALPORT_EXPORT Dllserialport:public QObject
     Q_OBJECT
 public:
     Dllserialport(QObject * parent = nullptr);
-    ~Dllserialport();
+    ~Dllserialport();    
 
-    void openReadClose();
-    void readPortInfo();
 private:
     engine * pEngine;
 signals:
