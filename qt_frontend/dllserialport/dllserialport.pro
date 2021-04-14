@@ -1,5 +1,6 @@
 QT -= gui
 QT += serialport
+QT += core
 
 TEMPLATE = lib
 DEFINES += DLLSERIALPORT_LIBRARY

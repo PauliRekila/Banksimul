@@ -7,6 +7,7 @@
 #include <QByteArray>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QIODevice>
 
 
 class engine : public QObject
@@ -15,11 +16,11 @@ class engine : public QObject
 public:
     explicit engine(QObject *parent = nullptr);
     ~engine();
-    void open();
-    void info();
+
+public slots:
+    void readData();
 private:
-    QSerialPort * pQSerialPort;
-    QSerialPortInfo * pQSerialPortInfo;
+    QSerialPort * pQSerialPort;    
 
 signals:
     void signalToInterface(QString);
