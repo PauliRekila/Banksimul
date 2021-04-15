@@ -57,8 +57,9 @@ void MainWindow::kirjauduUlos()
 
 void MainWindow::on_pushButton_clicked()
 {
-    // pdllm->getAsiakasNimi();
-    ppindll->testDialog();
+    //pdllm->getAsiakasNimi();
+    ppindll->pinIkkuna();
+    pdllm->korttinumero = "60006235E";
 }
 
 void MainWindow::receiveDataFromSerial(QString)

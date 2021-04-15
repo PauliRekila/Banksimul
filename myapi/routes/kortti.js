@@ -70,4 +70,15 @@ function(request, response) {
   });
 });
 
+router.post('/getId', 
+function(request, response) {
+  kortti.getId(request.body, function(err, dbResult) {
+    if (err) {
+      response.json(err);
+    } else {
+      response.json(dbResult[0]);
+    }
+  });
+});
+
 module.exports = router;

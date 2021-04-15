@@ -22,6 +22,9 @@ menu::~menu()
 void menu::tervetuloaAsiakas(QString asiakas)
 {
     ui->label_menu->setText("Tervetuloa, " + asiakas);
+
+    timer->start(30000);
+
     this->exec();
     this->show();
     this->close();

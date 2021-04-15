@@ -18,16 +18,19 @@ class enginerest : public QObject
     Q_OBJECT
 public:
     enginerest(QObject *parent = nullptr);
-    void tiedot(QString);
+    void tiedot(QString, QString);
+    //void kirjautuminen(QString, QString);
     QNetworkAccessManager * manager;
 private:
     QNetworkReply * reply;
 
 signals:
-    void sendSignalToInterface(QNetworkReply*);
+    void sendTiedotToInterface(QNetworkReply*);
+    void sendKorttiToInterface(QNetworkReply*);
 
 public slots:
-    void receiveNetworkReply(QNetworkReply*);
+    void receiveNetworkReplyTiedot(QNetworkReply*);
+    void receiveNetworkReplyKortti(QNetworkReply*);
 
 
 };

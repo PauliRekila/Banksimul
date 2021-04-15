@@ -11,14 +11,14 @@ class PINDLL_EXPORT Pindll : public QObject
 public:
     Pindll(QObject *parent = nullptr);
     ~Pindll();
-    void kirjautuminen(short);
-    void testDialog();
+    void kirjautuminen(QString);
+    void pinIkkuna();
 
 private:
     pinkysely *ppinkysely;
 
 signals:
-    void sendSignalToExe(short);
+    void sendSignalToExe(QString);
 
 public slots:
 

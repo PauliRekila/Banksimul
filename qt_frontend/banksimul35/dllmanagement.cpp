@@ -6,11 +6,17 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     pDllserialport = new Dllserialport;
     ppindll = new Pindll;
     pmenu = new menu;
-    connect(pDllrestapi, SIGNAL(sendSignalToExe(QNetworkReply*)),
-            this, SLOT(receiveSignalFromRestapi(QNetworkReply*)));
+    connect(pDllrestapi, SIGNAL(sendTiedotToExe(QNetworkReply*)),
+            this, SLOT(receiveTiedotFromRestapi(QNetworkReply*)));
 
-    connect(ppindll, SIGNAL(sendSignalToExe(short)),
-            this, SLOT(receiveSignalFromPindll(short)));
+    connect(pDllrestapi, SIGNAL(sendKorttiToExe(QNetworkReply*)),
+            this, SLOT(receiveKorttiFromRestapi(QNetworkReply*)));
+
+    connect(pDllserialport, SIGNAL(sendDataToExe(QString)),
+            this, SLOT(receiveDataFromSerialport(QString)));
+
+    connect(ppindll, SIGNAL(sendSignalToExe(QString)),
+            this, SLOT(receiveSignalFromPindll(QString)));
 
 }
 
@@ -31,12 +37,17 @@ void dllmanagement::deleteManager()
     pDllrestapi->deleteManager();
 }
 
-void dllmanagement::getAsiakasNimi()
+void dllmanagement::getTiedot(QString taulu, QString id)
 {
-    pDllrestapi->sendTiedot("1");
+    pDllrestapi->sendTiedot(taulu, id);
 }
 
-void dllmanagement::receiveSignalFromRestapi(QNetworkReply *reply)
+/*void dllmanagement::getKortti(QString korttinumero, QString pin)
+{
+    //pDllrestapi->sendKortti(korttinumero, pin);
+}*/
+
+void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
 {
     QByteArray response_data=reply->readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
@@ -49,7 +60,27 @@ void dllmanagement::receiveSignalFromRestapi(QNetworkReply *reply)
     deleteManager();
 }
 
-void dllmanagement::receiveSignalFromPindll(short pin)
+void dllmanagement::receiveKorttiFromRestapi(QNetworkReply* reply)
 {
+    QByteArray response_data=reply->readAll();
+    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+    QJsonObject json_obj = json_doc.object();
+    QString kortti;
+    kortti = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
+    qDebug() << kortti;
+    pmenu->tervetuloaAsiakas(kortti);
+    reply->deleteLater();
+    deleteManager();
+}
+
+void dllmanagement::receiveSignalFromPindll(QString pin)
+{
+    getTiedot("getId", korttinumero);
     qDebug() << "Signaali saatu pindll:stä exeen!" << pin;
+}
+
+void dllmanagement::receiveDataFromSerialport(QString)
+{
+    //getTiedot(getId, korttinumero)
+    //getKortti(korttinumero);
 }

@@ -34,6 +34,14 @@ const kortti = {
       [procedure_params.id, procedure_params.maara],
       callback
     );
-  }  
+  },
+  
+  getId: function(procedure_params, callback) {
+    return db.query(
+      'CALL getId(?)',
+      [procedure_params.korttinum],
+      callback
+    );
+  } 
 };
 module.exports = kortti;
