@@ -11,6 +11,7 @@ public:
     Dllrestapi(QObject *parent = nullptr);
     ~Dllrestapi();
     void sendTiedot(QString);
+    void deleteManager();
 
 private:
     enginerest * penginerest;

@@ -19,6 +19,11 @@ void Dllrestapi::sendTiedot(QString info)
     qDebug() << "exestä vastaanotettu funktio";
 }
 
+void Dllrestapi::deleteManager()
+{
+    penginerest->manager->deleteLater();
+}
+
 void Dllrestapi::receiveSignalFromEngine(QNetworkReply* reply)
 {
     emit sendSignalToExe(reply);

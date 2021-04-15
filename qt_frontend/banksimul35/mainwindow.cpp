@@ -55,7 +55,7 @@ void MainWindow::kirjauduUlos()
 void MainWindow::on_pushButton_clicked()
 {
     // pdllm->getAsiakasNimi();
-    //ppindll->testDialog();
+    ppindll->testDialog();
 }
 
 void MainWindow::receiveDataFromSerial(QString)

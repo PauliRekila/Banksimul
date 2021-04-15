@@ -3,6 +3,7 @@
 dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
 {
     pDllrestapi = new Dllrestapi;
+    pDllserialport = new Dllserialport;
     ppindll = new Pindll;
     pmenu = new menu;
     connect(pDllrestapi, SIGNAL(sendSignalToExe(QNetworkReply*)),
@@ -17,10 +18,17 @@ dllmanagement::~dllmanagement()
 {
     delete pDllrestapi;
     pDllrestapi = nullptr;
+    delete pDllserialport;
+    pDllserialport = nullptr;
     delete ppindll;
     ppindll = nullptr;
     delete pmenu;
     pmenu = nullptr;
+}
+
+void dllmanagement::deleteManager()
+{
+    pDllrestapi->deleteManager();
 }
 
 void dllmanagement::getAsiakasNimi()
@@ -38,7 +46,7 @@ void dllmanagement::receiveSignalFromRestapi(QNetworkReply *reply)
     qDebug() << asiakas;
     pmenu->tervetuloaAsiakas(asiakas);
     reply->deleteLater();
-    //manager->deleteLater();
+    deleteManager();
 }
 
 void dllmanagement::receiveSignalFromPindll(short pin)
