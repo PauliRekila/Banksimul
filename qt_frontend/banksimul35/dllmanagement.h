@@ -15,16 +15,19 @@ public:
     dllmanagement(QObject *parent = nullptr);
     ~dllmanagement();
     void deleteManager();
-    void getAsiakasNimi();
+    void getTiedot(QString, QString);
+    void getKortti(QString, QString);
+    QString korttinumero;
 private:
     Dllrestapi *pDllrestapi;
     Dllserialport *pDllserialport;
     Pindll *ppindll;
     menu *pmenu;
-signals:
 public slots:
-    void receiveSignalFromRestapi(QNetworkReply*);
-    void receiveSignalFromPindll(short);
+    void receiveTiedotFromRestapi(QNetworkReply*);
+    void receiveKorttiFromRestapi(QNetworkReply*);
+    void receiveSignalFromPindll(QString);
+    void receiveDataFromSerialport(QString);
 
 };
 

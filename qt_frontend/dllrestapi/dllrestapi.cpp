@@ -3,8 +3,12 @@
 Dllrestapi::Dllrestapi(QObject *parent) : QObject(parent)
 {
     penginerest = new enginerest;
-    connect(penginerest, SIGNAL(sendSignalToInterface(QNetworkReply*)),
-            this, SLOT(receiveSignalFromEngine(QNetworkReply*)));
+
+    connect(penginerest, SIGNAL(sendTiedotToInterface(QNetworkReply*)),
+            this, SLOT(receiveTiedotFromEngine(QNetworkReply*)));
+
+    connect(penginerest, SIGNAL(sendKorttiToInterface(QNetworkReply*)),
+            this, SLOT(receiveKorttiFromEngine(QNetworkReply*)));
 }
 
 Dllrestapi::~Dllrestapi()
@@ -13,10 +17,16 @@ Dllrestapi::~Dllrestapi()
     penginerest = nullptr;
 }
 
-void Dllrestapi::sendTiedot(QString info)
+void Dllrestapi::sendTiedot(QString taulu, QString id)
 {
-    penginerest->tiedot(info);
-    qDebug() << "exestä vastaanotettu funktio";
+    penginerest->tiedot(taulu, id);
+    qDebug() << taulu << id;
+}
+
+void Dllrestapi::sendKortti(QString korttinumero, QString pin)
+{
+    //penginerest->kirjautuminen(korttinumero, pin);
+    qDebug() << korttinumero << pin;
 }
 
 void Dllrestapi::deleteManager()
@@ -24,9 +34,12 @@ void Dllrestapi::deleteManager()
     penginerest->manager->deleteLater();
 }
 
-void Dllrestapi::receiveSignalFromEngine(QNetworkReply* reply)
+void Dllrestapi::receiveKorttiFromEngine(QNetworkReply* reply)
 {
-    emit sendSignalToExe(reply);
-    qDebug() << "interfacesta lähetetty signaali";
-    qDebug() << reply << "interface";
+    emit sendKorttiToExe(reply);
+}
+
+void Dllrestapi::receiveTiedotFromEngine(QNetworkReply* reply)
+{
+    emit sendTiedotToExe(reply);
 }

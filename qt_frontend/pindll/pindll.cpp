@@ -11,12 +11,12 @@ Pindll::~Pindll()
     ppinkysely = nullptr;
 }
 
-void Pindll::kirjautuminen(short pin)
+void Pindll::kirjautuminen(QString pin)
 {
     emit sendSignalToExe(pin);
 }
 
-void Pindll::testDialog()
+void Pindll::pinIkkuna()
 {
-    ppinkysely->testiDialogi2();
+    ppinkysely->pinIkkunaEngine();
 }

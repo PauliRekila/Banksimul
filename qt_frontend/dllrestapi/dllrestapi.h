@@ -10,16 +10,19 @@ class DLLRESTAPI_EXPORT Dllrestapi : public QObject
 public:
     Dllrestapi(QObject *parent = nullptr);
     ~Dllrestapi();
-    void sendTiedot(QString);
+    void sendTiedot(QString, QString);
+    void sendKortti(QString, QString);
     void deleteManager();
 
 private:
     enginerest * penginerest;
 public slots:
-    void receiveSignalFromEngine(QNetworkReply*);
+    void receiveTiedotFromEngine(QNetworkReply*);
+    void receiveKorttiFromEngine(QNetworkReply*);
 
 signals:
-    void sendSignalToExe(QNetworkReply*);
+    void sendTiedotToExe(QNetworkReply*);
+    void sendKorttiToExe(QNetworkReply*);
 };
 
 #endif // DLLRESTAPI_H

@@ -25,7 +25,7 @@ pinkysely::~pinkysely()
     //ppindll = nullptr;
 }
 
-void pinkysely::testiDialogi2()
+void pinkysely::pinIkkunaEngine()
 {
     ui->lineEdit_pin->clear();
     ui->label_ohje->setText("SYÖTÄ PIN-KOODI");
@@ -51,7 +51,7 @@ void pinkysely::on_b_ok_clicked()
     {
       Pindll *ppindll;
       ppindll = new Pindll;
-      short tunnusluku = ui->lineEdit_pin->text().toInt();
+      QString tunnusluku = ui->lineEdit_pin->text();
       ppindll->kirjautuminen(tunnusluku);
       qDebug() << "tunnusluku on:" << tunnusluku;
       delete ppindll;

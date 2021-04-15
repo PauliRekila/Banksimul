@@ -18,7 +18,7 @@ class pinkysely : public QDialog
 public:
     pinkysely(QWidget *parent = nullptr);
     ~pinkysely();
-    void testiDialogi2();
+    void pinIkkunaEngine();
     void lopeta();
 
 private slots:
