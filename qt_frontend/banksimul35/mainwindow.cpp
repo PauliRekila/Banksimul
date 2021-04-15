@@ -7,10 +7,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    // pdllm = new dllmanagement;
+    pdllm = new dllmanagement;
     ppindll = new Pindll;    
-    //QMainWindow::showFullScreen();
     timer = new QTimer(this);
+
+    //QMainWindow::showFullScreen();
+
     kirjauduUlos();
 
     connect(timer, &QTimer::timeout,
@@ -25,8 +27,9 @@ MainWindow::~MainWindow()
 {
     delete ui; 
 
-    // delete pdllm;
-    // pdllm = nullptr;
+    delete pdllm;
+    pdllm = nullptr;
+
     delete timer;
     timer = nullptr;
 
