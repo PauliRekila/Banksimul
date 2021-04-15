@@ -2,10 +2,11 @@
 #define DLLMANAGEMENT_H
 
 #include <QObject>
+#include <QTimer>
 #include "dllrestapi.h"
+#include "dllserialport.h"
 #include "pindll.h"
 #include "menu.h"
-#include <QTimer>
 
 class dllmanagement : public QObject
 {
@@ -13,9 +14,11 @@ class dllmanagement : public QObject
 public:
     dllmanagement(QObject *parent = nullptr);
     ~dllmanagement();
+    void deleteManager();
     void getAsiakasNimi();
 private:
     Dllrestapi *pDllrestapi;
+    Dllserialport *pDllserialport;
     Pindll *ppindll;
     menu *pmenu;
 signals:

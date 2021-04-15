@@ -19,8 +19,8 @@ class enginerest : public QObject
 public:
     enginerest(QObject *parent = nullptr);
     void tiedot(QString);
-private:
     QNetworkAccessManager * manager;
+private:
     QNetworkReply * reply;
 
 signals:

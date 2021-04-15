@@ -29,7 +29,7 @@ public slots:
     void receiveErrFromSerial();
 private:
     Ui::MainWindow *ui;
-    // menu *pmenu;
+    menu *pmenu;
     Pindll *ppindll;
     dllmanagement *pdllm;
     QTimer *timer;
