@@ -26,7 +26,6 @@ void Dllrestapi::sendTiedot(QString taulu, QString id)
 void Dllrestapi::sendKortti(QString korttinumero, QString pin)
 {
     penginerest->kirjautuminen(korttinumero, pin);
-    qDebug() << korttinumero << pin;
 }
 
 void Dllrestapi::deleteManager()

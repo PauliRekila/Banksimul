@@ -3,6 +3,9 @@
 Pindll::Pindll(QObject *parent) : QObject(parent)
 {
     ppinkysely = new pinkysely;
+
+    connect(ppinkysely, SIGNAL(signalToInterface(QString)),
+            this, SLOT(receiveSignalFromEngine(QString)));
 }
 
 Pindll::~Pindll()
@@ -11,13 +14,12 @@ Pindll::~Pindll()
     ppinkysely = nullptr;
 }
 
-void Pindll::kirjautuminen(QString pin)
-{
-    emit sendSignalToExe(pin);
-    qDebug() << "lähetetään exelle signaali" << pin;
-}
-
 void Pindll::pinIkkuna()
 {
     ppinkysely->pinIkkunaEngine();
+}
+
+void Pindll::receiveSignalFromEngine(QString pin)
+{
+    emit sendSignalToExe(pin);
 }

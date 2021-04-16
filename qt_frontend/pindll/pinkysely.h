@@ -49,6 +49,9 @@ private slots:
 private:
     Ui::pinkysely *ui;
     QTimer *timer;
+
+signals:
+    void signalToInterface(QString);
 };
 
 #endif // PINKYSELY_H

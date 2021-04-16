@@ -6,6 +6,7 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     pDllserialport = new Dllserialport;
     ppindll = new Pindll;
     pmenu = new menu;
+
     connect(pDllrestapi, SIGNAL(sendTiedotToExe(QNetworkReply*)),
             this, SLOT(receiveTiedotFromRestapi(QNetworkReply*)));
 
@@ -68,29 +69,25 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
 
 void dllmanagement::receiveKorttiFromRestapi(QNetworkReply* reply)
 {
-    qDebug() << reply;
-   /* QByteArray response_data=reply->readAll();
-    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
-    QJsonObject json_obj = json_doc.object();
-    QString asiakas;
-    asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
-    if (json_obj == "true")
+
+    QString response_data=reply->readAll();
+
+    if (response_data == "true")
     {
-        qDebug() << kortti;
-        pmenu->tervetuloaAsiakas(kortti);
+        qDebug() << response_data;
+        //pmenu->tervetuloaAsiakas(kortti);
         reply->deleteLater();
         deleteManager();
     }
     else
     {
-        qDebug() << "väärin";
-    }*/
+        qDebug() << response_data;
+    }
 }
 
 void dllmanagement::receiveSignalFromPindll(QString pin)
 {
-    qDebug() << "Signaali saatu pindll:stä exeen!" << pin;
-   // getKortti(korttinumero, pin);
+    getKortti(korttinumero, pin);
 }
 
 void dllmanagement::receiveDataFromSerialport(QString)

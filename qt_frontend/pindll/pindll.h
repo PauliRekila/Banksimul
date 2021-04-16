@@ -11,7 +11,6 @@ class PINDLL_EXPORT Pindll : public QObject
 public:
     Pindll(QObject *parent = nullptr);
     ~Pindll();
-    void kirjautuminen(QString);
     void pinIkkuna();
 
 private:
@@ -21,7 +20,7 @@ signals:
     void sendSignalToExe(QString);
 
 public slots:
-
+    void receiveSignalFromEngine(QString);
 };
 
 #endif // PINDLL_H

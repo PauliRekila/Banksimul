@@ -17,8 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&MainWindow::lopeta));
+
     connect(prfid, SIGNAL(sendDataToExe(QString)),
             this, SLOT(receiveDataFromSerial(QString)));
+
     connect(prfid, SIGNAL(sendErrToExe()),
             this, SLOT(receiveErrFromSerial()));
 }
@@ -57,10 +59,7 @@ void MainWindow::kirjauduUlos()
 
 void MainWindow::on_pushButton_clicked()
 {
-    //pdllm->getAsiakasNimi();
     pdllm->pinAloitus();
-    //ppindll->pinIkkuna();
-    //pdllm->korttinumero = "60006235E";
 }
 
 void MainWindow::receiveDataFromSerial(QString)
