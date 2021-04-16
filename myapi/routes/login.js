@@ -16,7 +16,7 @@ router.post('/',
             if (dbResult.length > 0) {
               bcrypt.compare(pinkoodi,dbResult[0].pinkoodi, function(err,compareResult) {
                 if(compareResult) {
-                  console.log("succes");
+                  console.log("success");
                   response.send(true);
                 }
                 else {

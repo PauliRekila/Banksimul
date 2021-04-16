@@ -59,10 +59,24 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
     QByteArray response_data=reply->readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonObject json_obj = json_doc.object();
-    QString asiakas;
-    asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
-    qDebug() << asiakas;
-    pmenu->tervetuloaAsiakas(asiakas);
+    QString arvo_1;
+    QString arvo_2;
+    QString arvo_3;
+
+    if(taulu == "kortti"){
+        arvo_1 = json_obj["idtili"].toString();
+        arvo_2 = json_obj["idasiakas"].toString();
+        qDebug() << arvo_1 << "korttijhgjk";
+        tili = arvo_1;
+
+        taulu = "asiakas";
+        getTiedot(taulu, arvo_2);
+    }
+    else if (taulu == "asiakas") {
+        arvo_1 = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
+        pmenu->tervetuloaAsiakas(arvo_1);
+    }
+
     reply->deleteLater();
     deleteManager();
 }
@@ -88,6 +102,8 @@ void dllmanagement::receiveKorttiFromRestapi(QNetworkReply* reply)
 void dllmanagement::receiveSignalFromPindll(QString pin)
 {
     getKortti(korttinumero, pin);
+    QString taulu = "kortti";
+    getTiedot(taulu, korttinumero);
 }
 
 void dllmanagement::receiveDataFromSerialport(QString)

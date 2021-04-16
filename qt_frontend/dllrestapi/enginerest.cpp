@@ -7,6 +7,7 @@ enginerest::enginerest(QObject *parent) : QObject(parent)
 
 void enginerest::tiedot(QString taulu, QString id)
 {
+    qDebug() << "Toimiiko yhteys" << taulu << id;
     QString site_url="http://localhost:3000/"+taulu+"/"+id;
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
