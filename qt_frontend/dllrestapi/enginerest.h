@@ -19,7 +19,7 @@ class enginerest : public QObject
 public:
     enginerest(QObject *parent = nullptr);
     void tiedot(QString, QString);
-    //void kirjautuminen(QString, QString);
+    void kirjautuminen(QString, QString);
     QNetworkAccessManager * manager;
 private:
     QNetworkReply * reply;
