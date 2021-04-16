@@ -7,6 +7,7 @@ enginerest::enginerest(QObject *parent) : QObject(parent)
 
 void enginerest::tiedot(QString taulu, QString id)
 {
+    qDebug() << "Toimiiko yhteys" << taulu << id;
     QString site_url="http://localhost:3000/"+taulu+"/"+id;
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
@@ -22,7 +23,6 @@ void enginerest::tiedot(QString taulu, QString id)
 
 void enginerest::kirjautuminen(QString korttinumero, QString pin)
 {
-    qDebug() << "yritetään kirjautua";
     QString site_url="http://localhost:3000/login";
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
@@ -39,13 +39,11 @@ void enginerest::kirjautuminen(QString korttinumero, QString pin)
     reply = manager->post(request, login);
     connect(manager, SIGNAL(finished(QNetworkReply*)),
     this, SLOT(receiveNetworkReplyKortti(QNetworkReply*)));
-    qDebug() << pin << korttinumero << "pin ja korttinumero";
 }
 
 void enginerest::receiveNetworkReplyKortti(QNetworkReply *)
 {
     emit sendKorttiToInterface(reply);
-    qDebug() << reply;
 }
 
 void enginerest::receiveNetworkReplyTiedot(QNetworkReply *reply)

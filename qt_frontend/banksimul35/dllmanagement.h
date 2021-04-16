@@ -19,6 +19,8 @@ public:
     void getKortti(QString, QString);
     void pinAloitus();
     QString korttinumero;
+    QString taulu;
+    QString tili;
 
 private:
     Dllrestapi *pDllrestapi;

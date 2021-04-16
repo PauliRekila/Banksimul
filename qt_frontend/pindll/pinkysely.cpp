@@ -1,6 +1,5 @@
 #include "pinkysely.h"
 #include "ui_pinkysely.h"
-#include "pindll.h"
 
 
 pinkysely::pinkysely(QWidget *parent) :
@@ -13,16 +12,11 @@ pinkysely::pinkysely(QWidget *parent) :
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&pinkysely::lopeta));
-
-    //ppindll = new Pindll;
 }
 
 pinkysely::~pinkysely()
 {
     delete ui;
-
-    //delete ppindll;
-    //ppindll = nullptr;
 }
 
 void pinkysely::pinIkkunaEngine()
@@ -49,17 +43,15 @@ void pinkysely::on_b_ok_clicked()
 
     if (ui->lineEdit_pin->text().length() == 4)
     {
-      Pindll *ppindll;
-      ppindll = new Pindll;
-      QString tunnusluku = ui->lineEdit_pin->text();
-      ppindll->kirjautuminen(tunnusluku);
-      qDebug() << "tunnusluku on:" << tunnusluku;
-      delete ppindll;
-      ppindll = nullptr;
+      QString pin = ui->lineEdit_pin->text();
+      emit signalToInterface(pin);
+      qDebug() << "tunnusluku on:" << pin;
+      timer->stop();
     }
     else
     {
       ui->label_ohje->setText("Anna 4 numeroa");
+      timer->start(10000);
     }
 
      ui->lineEdit_pin->clear();

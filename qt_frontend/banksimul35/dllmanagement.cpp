@@ -6,6 +6,7 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     pDllserialport = new Dllserialport;
     ppindll = new Pindll;
     pmenu = new menu;
+
     connect(pDllrestapi, SIGNAL(sendTiedotToExe(QNetworkReply*)),
             this, SLOT(receiveTiedotFromRestapi(QNetworkReply*)));
 
@@ -58,39 +59,51 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
     QByteArray response_data=reply->readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonObject json_obj = json_doc.object();
-    QString asiakas;
-    asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
-    qDebug() << asiakas;
-    pmenu->tervetuloaAsiakas(asiakas);
+    QString arvo_1;
+    QString arvo_2;
+    QString arvo_3;
+
+    if(taulu == "kortti"){
+        arvo_1 = json_obj["idtili"].toString();
+        arvo_2 = json_obj["idasiakas"].toString();
+        qDebug() << arvo_1 << "korttijhgjk";
+        tili = arvo_1;
+
+        taulu = "asiakas";
+        getTiedot(taulu, arvo_2);
+    }
+    else if (taulu == "asiakas") {
+        arvo_1 = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
+        pmenu->tervetuloaAsiakas(arvo_1);
+    }
+
     reply->deleteLater();
     deleteManager();
 }
 
 void dllmanagement::receiveKorttiFromRestapi(QNetworkReply* reply)
 {
-    qDebug() << reply;
-   /* QByteArray response_data=reply->readAll();
-    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
-    QJsonObject json_obj = json_doc.object();
-    QString asiakas;
-    asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
-    if (json_obj == "true")
+
+    QString response_data=reply->readAll();
+
+    if (response_data == "true")
     {
-        qDebug() << kortti;
-        pmenu->tervetuloaAsiakas(kortti);
+        qDebug() << response_data;
+        //pmenu->tervetuloaAsiakas(kortti);
         reply->deleteLater();
         deleteManager();
     }
     else
     {
-        qDebug() << "väärin";
-    }*/
+        qDebug() << response_data;
+    }
 }
 
 void dllmanagement::receiveSignalFromPindll(QString pin)
 {
-    qDebug() << "Signaali saatu pindll:stä exeen!" << pin;
-   // getKortti(korttinumero, pin);
+    getKortti(korttinumero, pin);
+    QString taulu = "kortti";
+    getTiedot(taulu, korttinumero);
 }
 
 void dllmanagement::receiveDataFromSerialport(QString)
