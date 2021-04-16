@@ -14,6 +14,7 @@ Pindll::~Pindll()
 void Pindll::kirjautuminen(QString pin)
 {
     emit sendSignalToExe(pin);
+    qDebug() << "lähetetään exelle signaali" << pin;
 }
 
 void Pindll::pinIkkuna()

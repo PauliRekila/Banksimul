@@ -17,7 +17,9 @@ public:
     void deleteManager();
     void getTiedot(QString, QString);
     void getKortti(QString, QString);
+    void pinAloitus();
     QString korttinumero;
+
 private:
     Dllrestapi *pDllrestapi;
     Dllserialport *pDllserialport;
