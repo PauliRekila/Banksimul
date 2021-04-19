@@ -20,13 +20,13 @@ const kortti = {
   delete: function(id, callback) {
     return db.query('delete from kortti where idkortti=?', [id], callback);
   },
-  update: function(id, kortti, callback) {
-    bcrypt.hash(kortti.pinkoodi, saltRounds, function(err, hash){
+  
+  lukitus: function(korttinumero, kortti, callback) {
+
     return db.query(
-      'update kortti set korttinumero=?,pinkoodi=?, lukittu=?,idtili=? where idkortti=?',
-      [kortti.korttinumero, hash, kortti.lukittu, kortti.idtili, id],
-      callback)
-    });
+      'update kortti set lukittu=? where korttinumero=?',
+      [kortti.lukittu, korttinumero],
+      callback);
   },
   uusi_tapahtuma: function(procedure_params, callback) {
     return db.query(

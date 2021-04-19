@@ -27,7 +27,6 @@ void pinkysely::pinIkkunaEngine()
     timer->start(10000);
 
     this->exec();
-    this->show();
     this->close();
 }
 

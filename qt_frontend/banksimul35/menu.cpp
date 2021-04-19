@@ -26,7 +26,6 @@ void menu::tervetuloaAsiakas(QString asiakas)
     timer->start(30000);
 
     this->exec();
-    this->show();
     this->close();
 }
 

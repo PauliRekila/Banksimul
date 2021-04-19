@@ -73,8 +73,9 @@ void dllmanagement::getAsiakasNimi(QString id)
 
 void dllmanagement::pinAloitus()
 {
-    korttinumero = "600064972";
-    ppindll->pinIkkuna();
+    taulu = "kortti";
+    korttinumero = "60006235E";
+    getTiedot(taulu, korttinumero);
 }
 
 void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
@@ -83,16 +84,20 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonObject json_obj = json_doc.object();
 
-    qDebug() << "receiveFromPindll";
+    qDebug() << "receiveFromrestapi";
 
     if(taulu == "kortti"){
         arvo_1 = json_obj["idtili"].toString();
         arvo_2 = QString::number(json_obj["idasiakas"].toInt());
-        qDebug() << arvo_2 << "id: ";
-        tili = arvo_1;
-        //getAsiakasNimi(arvo_2);
-        taulu = "asiakas";
-        getTiedot(taulu, arvo_2);
+        arvo_3 = QString::number(json_obj["lukittu"].toInt());
+
+        if(arvo_3 == "0"){
+            tili = arvo_1;
+            ppindll->pinIkkuna();
+        }
+        else {
+            pilmoitus->lukossaIlmoitus();
+        }
     }
     else if (taulu == "asiakas") {
         arvo_1 = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
@@ -116,8 +121,8 @@ void dllmanagement::receiveKorttiFromRestapi(QNetworkReply* reply)
     if (response_data == "true")
     {
         qDebug() << response_data;
-        taulu = "kortti";
-        getTiedot(taulu, korttinumero);
+        taulu = "asiakas";
+        getTiedot(taulu, arvo_2);
         reply->deleteLater();
         deleteManager();
     }
@@ -139,11 +144,15 @@ void dllmanagement::receiveSignalFromPindll(QString pin)
 
 void dllmanagement::receiveLukittuFromPindll()
 {
+    pDllrestapi->sendLukitus(korttinumero);
     pilmoitus->lukittuIlmoitus();
 }
 
-void dllmanagement::receiveDataFromSerialport(QString)
+void dllmanagement::receiveDataFromSerialport(QString korttinumeroSerial)
 {
+    //taulu = "kortti";
+    //korttinumero = korttinumeroSerial;
+    //getTiedot(taulu, korttinumero);
     //ppindll->pinIkkuna();
     //ppindll->yritykset=0;
 }

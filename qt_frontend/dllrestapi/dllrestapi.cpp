@@ -28,6 +28,11 @@ void Dllrestapi::sendKortti(QString korttinumero, QString pin)
     penginerest->kirjautuminen(korttinumero, pin);
 }
 
+void Dllrestapi::sendLukitus(QString korttinumero)
+{
+    penginerest->lukitus(korttinumero);
+}
+
 void Dllrestapi::deleteManager()
 {
     penginerest->manager->deleteLater();
