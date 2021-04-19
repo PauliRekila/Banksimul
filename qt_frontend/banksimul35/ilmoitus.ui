@@ -32,24 +32,6 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="QLabel" name="label_aika">
-     <property name="font">
-      <font>
-       <pointsize>26</pointsize>
-      </font>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <resources/>

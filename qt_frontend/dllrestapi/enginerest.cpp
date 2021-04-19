@@ -49,5 +49,5 @@ void enginerest::receiveNetworkReplyKortti(QNetworkReply *)
 void enginerest::receiveNetworkReplyTiedot(QNetworkReply *reply)
 {
     emit sendTiedotToInterface(reply);
-    qDebug() << reply;
+    qDebug() << "QReply: " << reply;
 }

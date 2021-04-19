@@ -5,7 +5,12 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     pDllrestapi = new Dllrestapi;
     pDllserialport = new Dllserialport;
     ppindll = new Pindll;
+
     pmenu = new menu;
+    pilmoitus = new ilmoitus;
+    pnosto = new nosto;
+    psaldo = new saldo;
+    ptapahtumat = new tapahtumat;
 
     connect(pDllrestapi, SIGNAL(sendTiedotToExe(QNetworkReply*)),
             this, SLOT(receiveTiedotFromRestapi(QNetworkReply*)));
@@ -19,6 +24,9 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     connect(ppindll, SIGNAL(sendSignalToExe(QString)),
             this, SLOT(receiveSignalFromPindll(QString)));
 
+    connect(ppindll, SIGNAL(korttiLukittu()),
+            this, SLOT(receiveLukittuFromPindll()));
+
 }
 
 dllmanagement::~dllmanagement()
@@ -29,13 +37,22 @@ dllmanagement::~dllmanagement()
     pDllserialport = nullptr;
     delete ppindll;
     ppindll = nullptr;
+
     delete pmenu;
     pmenu = nullptr;
+    delete pilmoitus;
+    pilmoitus = nullptr;
+    delete pnosto;
+    pnosto = nullptr;
+    delete psaldo;
+    psaldo = nullptr;
+    delete ptapahtumat;
+    ptapahtumat = nullptr;
 }
 
 void dllmanagement::deleteManager()
 {
-    pDllrestapi->deleteManager();
+   // pDllrestapi->deleteManager();
 }
 
 void dllmanagement::getTiedot(QString taulu, QString id)
@@ -48,9 +65,15 @@ void dllmanagement::getKortti(QString korttinumero, QString pin)
     pDllrestapi->sendKortti(korttinumero, pin);
 }
 
+void dllmanagement::getAsiakasNimi(QString id)
+{
+    taulu = "asiakas";
+    getTiedot(taulu, id);
+}
+
 void dllmanagement::pinAloitus()
 {
-    korttinumero = "60006235E";
+    korttinumero = "600064972";
     ppindll->pinIkkuna();
 }
 
@@ -59,22 +82,26 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
     QByteArray response_data=reply->readAll();
     QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
     QJsonObject json_obj = json_doc.object();
-    QString arvo_1;
-    QString arvo_2;
-    QString arvo_3;
+
+    qDebug() << "receiveFromPindll";
 
     if(taulu == "kortti"){
         arvo_1 = json_obj["idtili"].toString();
-        arvo_2 = json_obj["idasiakas"].toString();
-        qDebug() << arvo_1 << "korttijhgjk";
+        arvo_2 = QString::number(json_obj["idasiakas"].toInt());
+        qDebug() << arvo_2 << "id: ";
         tili = arvo_1;
-
+        //getAsiakasNimi(arvo_2);
         taulu = "asiakas";
         getTiedot(taulu, arvo_2);
     }
     else if (taulu == "asiakas") {
         arvo_1 = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
         pmenu->tervetuloaAsiakas(arvo_1);
+        ppindll->sendLopeta();
+        qDebug() << "Arvo1 asiakas nimi" << arvo_1;
+    }
+    else {
+        qDebug() << "Funktiot ei tapahdu" << taulu;
     }
 
     reply->deleteLater();
@@ -89,25 +116,34 @@ void dllmanagement::receiveKorttiFromRestapi(QNetworkReply* reply)
     if (response_data == "true")
     {
         qDebug() << response_data;
-        //pmenu->tervetuloaAsiakas(kortti);
+        taulu = "kortti";
+        getTiedot(taulu, korttinumero);
         reply->deleteLater();
         deleteManager();
     }
+    else if (response_data == "false")
+    {
+        ppindll->wrongPin();
+        qDebug() << response_data;
+    }
     else
     {
-        qDebug() << response_data;
+        qDebug() << "Kirjautumisvirhe";
     }
 }
 
 void dllmanagement::receiveSignalFromPindll(QString pin)
 {
     getKortti(korttinumero, pin);
-    QString taulu = "kortti";
-    getTiedot(taulu, korttinumero);
+}
+
+void dllmanagement::receiveLukittuFromPindll()
+{
+    pilmoitus->lukittuIlmoitus();
 }
 
 void dllmanagement::receiveDataFromSerialport(QString)
 {
     //ppindll->pinIkkuna();
-
+    //ppindll->yritykset=0;
 }

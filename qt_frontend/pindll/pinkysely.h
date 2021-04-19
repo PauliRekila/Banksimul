@@ -20,6 +20,7 @@ public:
     ~pinkysely();
     void pinIkkunaEngine();
     void lopeta();
+    void virheIlmoitus(short);
 
 private slots:
     void on_b1_clicked();

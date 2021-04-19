@@ -20,7 +20,7 @@ Dllrestapi::~Dllrestapi()
 void Dllrestapi::sendTiedot(QString taulu, QString id)
 {
     penginerest->tiedot(taulu, id);
-    qDebug() << taulu << id;
+    qDebug() << "Interface: " << taulu << id;
 }
 
 void Dllrestapi::sendKortti(QString korttinumero, QString pin)
@@ -41,4 +41,5 @@ void Dllrestapi::receiveKorttiFromEngine(QNetworkReply* reply)
 void Dllrestapi::receiveTiedotFromEngine(QNetworkReply* reply)
 {
     emit sendTiedotToExe(reply);
+    qDebug() << "Tiedot from engine";
 }

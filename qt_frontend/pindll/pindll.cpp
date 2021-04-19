@@ -19,6 +19,25 @@ void Pindll::pinIkkuna()
     ppinkysely->pinIkkunaEngine();
 }
 
+void Pindll::sendLopeta()
+{
+    ppinkysely->lopeta();
+}
+
+void Pindll::wrongPin()
+{
+    yritykset++;
+
+    if (yritykset < 3) {
+        ppinkysely->virheIlmoitus(yritykset);
+    }
+    else {
+        emit korttiLukittu();
+        ppinkysely->lopeta();
+        qDebug() << "Kortti lukittu";
+    }
+}
+
 void Pindll::receiveSignalFromEngine(QString pin)
 {
     emit sendSignalToExe(pin);

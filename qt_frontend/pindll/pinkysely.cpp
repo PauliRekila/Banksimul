@@ -38,6 +38,14 @@ void pinkysely::lopeta()
     timer->stop();
 }
 
+void pinkysely::virheIlmoitus(short yritykset)
+{
+    short yritysten_maara = 3 - yritykset;
+    QString jaljella = QString::number(yritysten_maara);
+    ui->label_ohje->setText("Väärä PIN, "+jaljella+" yritystä jäljellä");
+    ui->lineEdit_pin->clear();
+}
+
 void pinkysely::on_b_ok_clicked()
 {
 

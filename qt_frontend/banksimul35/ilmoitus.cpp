@@ -25,3 +25,13 @@ void ilmoitus::lopeta()
     this->close();
     timer->stop();
 }
+
+void ilmoitus::lukittuIlmoitus()
+{
+    timer->start(10000);
+    ui->label_ilmoitus->setText("Liian monta yritystä, kortti lukittu");
+
+    this->exec();
+    this->show();
+    this->close();
+}
