@@ -33,6 +33,7 @@ void pinkysely::pinIkkunaEngine()
 void pinkysely::lopeta()
 {
     qDebug() << "Aika loppui";
+    ui->lineEdit_pin->clear();
     this->close();
     timer->stop();
 }

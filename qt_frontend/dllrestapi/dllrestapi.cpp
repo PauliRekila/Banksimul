@@ -45,6 +45,6 @@ void Dllrestapi::receiveKorttiFromEngine(QNetworkReply* reply)
 
 void Dllrestapi::receiveTiedotFromEngine(QNetworkReply* reply)
 {
-    emit sendTiedotToExe(reply);
     qDebug() << "Tiedot from engine";
+    emit sendTiedotToExe(reply);
 }

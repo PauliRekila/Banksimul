@@ -32,6 +32,12 @@ void menu::tervetuloaAsiakas(QString asiakas)
 void menu::lopeta()
 {
     qDebug() << "Aika loppui";
+    emit kirjauduUlos();
     this->close();
     timer->stop();
+}
+
+void menu::on_b_ulos_clicked()
+{
+    lopeta();
 }
