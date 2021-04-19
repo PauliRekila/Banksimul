@@ -25,3 +25,21 @@ void ilmoitus::lopeta()
     this->close();
     timer->stop();
 }
+
+void ilmoitus::lukossaIlmoitus()
+{
+    timer->start(10000);
+    ui->label_ilmoitus->setText("Kortti on lukittu, ota yhteyttä pankkiisi");
+
+    this->exec();
+    this->close();
+}
+
+void ilmoitus::lukittuIlmoitus()
+{
+    timer->start(10000);
+    ui->label_ilmoitus->setText("Liian monta yritystä, kortti lukittu");
+
+    this->exec();
+    this->close();
+}

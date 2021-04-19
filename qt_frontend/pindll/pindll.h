@@ -12,12 +12,16 @@ public:
     Pindll(QObject *parent = nullptr);
     ~Pindll();
     void pinIkkuna();
+    void sendLopeta();
+    void wrongPin();
 
 private:
     pinkysely *ppinkysely;
+    short yritykset = 0;
 
 signals:
     void sendSignalToExe(QString);
+    void korttiLukittu();
 
 public slots:
     void receiveSignalFromEngine(QString);

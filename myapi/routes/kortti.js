@@ -47,10 +47,9 @@ function(request, response) {
   });
 });
 
-
-router.put('/:id', 
+router.put('/:korttinumero', 
 function(request, response) {
-  kortti.update(request.params.id, request.body, function(err, dbResult) {
+  kortti.lukitus(request.params.korttinumero, request.body, function(err, dbResult) {
     if (err) {
       response.json(err);
     } else {

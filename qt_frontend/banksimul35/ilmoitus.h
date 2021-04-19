@@ -17,6 +17,8 @@ public:
     explicit ilmoitus(QWidget *parent = nullptr);
     ~ilmoitus();
     void lopeta();
+    void lukossaIlmoitus();
+    void lukittuIlmoitus();
 
 private:
     QTimer *timer;

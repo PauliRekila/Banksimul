@@ -27,7 +27,6 @@ void pinkysely::pinIkkunaEngine()
     timer->start(10000);
 
     this->exec();
-    this->show();
     this->close();
 }
 
@@ -36,6 +35,14 @@ void pinkysely::lopeta()
     qDebug() << "Aika loppui";
     this->close();
     timer->stop();
+}
+
+void pinkysely::virheIlmoitus(short yritykset)
+{
+    short yritysten_maara = 3 - yritykset;
+    QString jaljella = QString::number(yritysten_maara);
+    ui->label_ohje->setText("Väärä PIN, "+jaljella+" yritystä jäljellä");
+    ui->lineEdit_pin->clear();
 }
 
 void pinkysely::on_b_ok_clicked()

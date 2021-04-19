@@ -12,6 +12,7 @@ public:
     ~Dllrestapi();
     void sendTiedot(QString, QString);
     void sendKortti(QString, QString);
+    void sendLukitus(QString);
     void deleteManager();
 
 private:

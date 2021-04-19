@@ -20,12 +20,17 @@ Dllrestapi::~Dllrestapi()
 void Dllrestapi::sendTiedot(QString taulu, QString id)
 {
     penginerest->tiedot(taulu, id);
-    qDebug() << taulu << id;
+    qDebug() << "Interface: " << taulu << id;
 }
 
 void Dllrestapi::sendKortti(QString korttinumero, QString pin)
 {
     penginerest->kirjautuminen(korttinumero, pin);
+}
+
+void Dllrestapi::sendLukitus(QString korttinumero)
+{
+    penginerest->lukitus(korttinumero);
 }
 
 void Dllrestapi::deleteManager()
@@ -41,4 +46,5 @@ void Dllrestapi::receiveKorttiFromEngine(QNetworkReply* reply)
 void Dllrestapi::receiveTiedotFromEngine(QNetworkReply* reply)
 {
     emit sendTiedotToExe(reply);
+    qDebug() << "Tiedot from engine";
 }

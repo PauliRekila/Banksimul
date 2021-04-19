@@ -21,6 +21,23 @@ void enginerest::tiedot(QString taulu, QString id)
     reply = manager->get(request);
 }
 
+void enginerest::lukitus(QString korttinumero)
+{
+    QString site_url="http://localhost:3000/kortti/"+korttinumero;
+    QString credentials="banksimul35:1234";
+    QNetworkRequest request((site_url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QByteArray data = credentials.toLocal8Bit().toBase64();
+    QString headerData = "Basic " + data;
+    request.setRawHeader( "Authorization", headerData.toLocal8Bit() );
+    QJsonObject obj;
+    obj["lukittu"] = 1;
+    QJsonDocument doc(obj);
+    QByteArray lukittu = doc.toJson();
+    manager = new QNetworkAccessManager(this);
+    manager->put(request, lukittu);
+}
+
 void enginerest::kirjautuminen(QString korttinumero, QString pin)
 {
     QString site_url="http://localhost:3000/login";
@@ -49,5 +66,5 @@ void enginerest::receiveNetworkReplyKortti(QNetworkReply *)
 void enginerest::receiveNetworkReplyTiedot(QNetworkReply *reply)
 {
     emit sendTiedotToInterface(reply);
-    qDebug() << reply;
+    qDebug() << "QReply: " << reply;
 }
