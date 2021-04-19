@@ -18,9 +18,13 @@ public:
     ~menu();
     void tervetuloaAsiakas(QString);
     void lopeta();
+private slots:
+    void on_b_ulos_clicked();
 private:
     Ui::menu *ui;
     QTimer *timer;
+signals:
+    void kirjauduUlos();
 };
 
 #endif // MENU_H

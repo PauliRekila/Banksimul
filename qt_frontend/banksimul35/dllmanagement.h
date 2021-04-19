@@ -47,6 +47,7 @@ public slots:
     void receiveSignalFromPindll(QString);
     void receiveLukittuFromPindll();
     void receiveDataFromSerialport(QString);
+    void receiveKirjauduUlosFromMenu();
 
 };
 
