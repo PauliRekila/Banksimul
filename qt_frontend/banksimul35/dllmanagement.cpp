@@ -30,6 +30,9 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     connect(pmenu, SIGNAL(kirjauduUlos()),
             this, SLOT(receiveKirjauduUlosFromMenu()));
 
+    connect(pmenu, SIGNAL(requestSaldo()),
+            this, SLOT(receiveRequestSaldoFromMenu()));
+
 }
 
 dllmanagement::~dllmanagement()
@@ -90,12 +93,11 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
     qDebug() << "receiveFromrestapi";
 
     if(taulu == "kortti"){
-        arvo_1 = json_obj["idtili"].toString();
+        tili = QString::number(json_obj["idtili"].toInt());
         arvo_2 = QString::number(json_obj["idasiakas"].toInt());
         arvo_3 = QString::number(json_obj["lukittu"].toInt());
 
         if(arvo_3 == "0"){
-            tili = arvo_1;
             ppindll->pinIkkuna();
         }
         else {
@@ -103,9 +105,15 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
         }
     }
     else if (taulu == "asiakas") {
-        arvo_1 = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
+        asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
         ppindll->sendLopeta();
-        pmenu->tervetuloaAsiakas(arvo_1);
+        pmenu->tervetuloaAsiakas(asiakas);
+    }
+    else if (taulu == "tili") {
+        tilinsaldo = QString::number(json_obj["saldo"].toDouble());
+        qDebug() << "Saldo: " << tilinsaldo;
+        qDebug() << "Tili: " << tili;
+        psaldo->saldoIkkuna(asiakas, tilinsaldo);
     }
     else {
         qDebug() << "Funktiot ei tapahdu" << taulu;
@@ -161,6 +169,8 @@ void dllmanagement::receiveKirjauduUlosFromMenu()
 {
     korttinumero.clear();
     taulu.clear();
+    asiakas.clear();
+    tilinsaldo.clear();
     tili.clear();
     arvo_1.clear();
     arvo_2.clear();
@@ -169,4 +179,12 @@ void dllmanagement::receiveKirjauduUlosFromMenu()
     qDebug() << "Taulu" << taulu;
 
     deleteManager();
+}
+
+void dllmanagement::receiveRequestSaldoFromMenu()
+{
+    qDebug() << "Tili jo aiakasemiin: " << tili;
+    taulu = "tili";
+    getTiedot(taulu, tili);
+    //psaldo->saldoIkkuna(asiakas);
 }

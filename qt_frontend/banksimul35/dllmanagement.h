@@ -26,7 +26,9 @@ public:
 
     QString korttinumero;
     QString taulu;
+    QString asiakas;
     QString tili;
+    QString tilinsaldo;
     QString arvo_1;
     QString arvo_2;
     QString arvo_3;
@@ -48,6 +50,7 @@ public slots:
     void receiveLukittuFromPindll();
     void receiveDataFromSerialport(QString);
     void receiveKirjauduUlosFromMenu();
+    void receiveRequestSaldoFromMenu();
 
 };
 
