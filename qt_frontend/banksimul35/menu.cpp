@@ -20,7 +20,7 @@ menu::~menu()
 }
 
 void menu::tervetuloaAsiakas(QString asiakas)
-{
+{   
     ui->label_menu->setText("Tervetuloa, " + asiakas);
 
     timer->start(30000);
@@ -40,4 +40,10 @@ void menu::lopeta()
 void menu::on_b_ulos_clicked()
 {
     lopeta();
+}
+
+void menu::on_b_saldo_clicked()
+{
+    emit requestSaldo();
+    timer->start(30000);
 }

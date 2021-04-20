@@ -22,6 +22,22 @@ saldo::~saldo()
 void saldo::lopeta()
 {
     qDebug() << "Aika loppui";
-    this->close();
     timer->stop();
+    this->close();
+}
+
+void saldo::saldoIkkuna(QString asiakas, QString saldo)
+{
+    ui->label_nimi->setText(asiakas);
+    ui->label_saldo->setText(saldo);
+
+    timer->start(10000);
+
+    this->exec();
+    this->close();
+}
+
+void saldo::on_b_poistu_clicked()
+{
+    lopeta();
 }

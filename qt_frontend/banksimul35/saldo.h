@@ -17,6 +17,10 @@ public:
     saldo(QWidget *parent = nullptr);
     ~saldo();
     void lopeta();
+    void saldoIkkuna(QString, QString);
+
+private slots:
+    void on_b_poistu_clicked();
 
 private:
     Ui::saldo *ui;
