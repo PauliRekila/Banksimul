@@ -30,7 +30,7 @@ engine::~engine()
 void engine::readData()
 {
 
-    QString data = "";
+    QString data.clear();
     data = pQSerialPort->readAll();
     data.remove(0,4);
     data.chop(3);
