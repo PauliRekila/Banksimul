@@ -23,7 +23,7 @@ void menu::tervetuloaAsiakas(QString asiakas)
 {   
     ui->label_menu->setText("Tervetuloa, " + asiakas);
 
-    timer->start(30000);
+    timer->start(10000);
 
     this->exec();
     this->close();
@@ -44,12 +44,18 @@ void menu::on_b_ulos_clicked()
 
 void menu::on_b_saldo_clicked()
 {
+    timer->stop();
     emit requestSaldo();
-    timer->start(30000);
 }
 
 void menu::on_b_tilitapahtumia_clicked()
 {
+    timer->stop();
     emit requestTapahtumat();
-    timer->start(30000);
+}
+
+void menu::on_b_nosta_clicked()
+{
+    timer->stop();
+    emit requestNosto();
 }

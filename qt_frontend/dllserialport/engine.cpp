@@ -7,6 +7,19 @@ engine::engine(QObject *parent) : QObject(parent)
     connect(pQSerialPort, SIGNAL(readyRead()),
             this, SLOT(readData()));
 
+    avaaPortti();
+
+    qDebug() << "engine luotu";
+}
+engine::~engine()
+{
+    delete pQSerialPort;
+    pQSerialPort = nullptr;
+
+}
+
+void engine::avaaPortti()
+{
     pQSerialPort->setPortName("COM3");
     qDebug() << pQSerialPort->portName();
 
@@ -17,14 +30,6 @@ engine::engine(QObject *parent) : QObject(parent)
     pQSerialPort->setFlowControl(QSerialPort::NoFlowControl);
     //pQSerialPort->setFlowControl(QSerialPort::HardwareControl);
     pQSerialPort->open(QIODevice::ReadWrite);
-
-    qDebug() << "engine luotu";
-}
-engine::~engine()
-{
-    delete pQSerialPort;
-    pQSerialPort = nullptr;
-
 }
 
 void engine::readData()

@@ -32,6 +32,8 @@ private slots:
 private:
     Ui::tapahtumat *ui;
     QTimer *timer;
+signals:
+    void menuTimer();
 };
 
 #endif // TAPAHTUMAT_H

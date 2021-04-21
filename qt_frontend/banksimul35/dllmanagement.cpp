@@ -36,6 +36,30 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     connect(pmenu, SIGNAL(requestTapahtumat()),
             this, SLOT(receiveRequestTapahtumatFromMenu()));
 
+    connect(pmenu, SIGNAL(requestNosto()),
+            this, SLOT(receiveRequestNostoFromMenu()));
+
+    connect(pnosto, SIGNAL(eiRahaa()),
+            this, SLOT(receiveEiRahaaFromNosto()));
+
+    connect(pnosto, SIGNAL(nostaMaara(double)),
+            this, SLOT(receiveNostaMaaraFromNosto(double)));
+
+    connect(pnosto, SIGNAL(menuTimer()),
+            this, SLOT(receiveMenuTimer()));
+
+    connect(ptapahtumat, SIGNAL(menuTimer()),
+            this, SLOT(receiveMenuTimer()));
+
+    connect(psaldo, SIGNAL(menuTimer()),
+            this, SLOT(receiveMenuTimer()));
+
+    connect(pilmoitus, SIGNAL(nostaTimer()),
+            this, SLOT(receiveNostaTimerFromIlmoitus()));
+
+    connect(ppindll, SIGNAL(kirjauduUlosExeen()),
+            this, SLOT(receiveKirjauduUlosFromMenu()));
+
 }
 
 dllmanagement::~dllmanagement()
@@ -82,19 +106,22 @@ void dllmanagement::getAsiakasNimi(QString id)
 
 void dllmanagement::pinAloitus()
 {
-    taulu = "kortti";
-    korttinumero = "60006235E"; //Teppo
+    //taulu = "kortti";
+    //korttinumero = "60006235E"; //Teppo
     //korttinumero = "600064972"; //Maija
-    getTiedot(taulu, korttinumero);
+    //getTiedot(taulu, korttinumero);
 }
 
-void dllmanagement::saldoTaiTapahtumat()
+void dllmanagement::saldoTaiTapahtumatTaiNosto()
 {
     if (painettunappi == "saldo"){
         psaldo->saldoIkkuna(asiakas,tilinsaldo,tilintapahtumat);
     }
     else if (painettunappi == "tapahtumat"){
         ptapahtumat->tapahtumatIkkuna(asiakas,tilinsaldo,tilintapahtumat);
+    }
+    else if (painettunappi == "nosto"){
+        pnosto->nostoIkkuna(asiakas, tilinsaldo);
     }
 }
 
@@ -134,7 +161,7 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
         tilinsaldo = QString::number(json_obj["saldo"].toDouble());
         qDebug() << "Saldo: " << tilinsaldo;
         qDebug() << "Tili: " << tili;
-        saldoTaiTapahtumat();
+        saldoTaiTapahtumatTaiNosto();
     }
     else if (taulu == "tapahtumat") {
         QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
@@ -194,11 +221,10 @@ void dllmanagement::receiveLukittuFromPindll()
 
 void dllmanagement::receiveDataFromSerialport(QString korttinumeroSerial)
 {
-    //taulu = "kortti";
-    //korttinumero = korttinumeroSerial;
-    //getTiedot(taulu, korttinumero);
-    //ppindll->pinIkkuna();
-    //ppindll->yritykset=0;
+    taulu = "kortti";
+    korttinumero = korttinumeroSerial;
+    getTiedot(taulu, korttinumero);
+
 }
 
 void dllmanagement::receiveKirjauduUlosFromMenu()
@@ -211,11 +237,12 @@ void dllmanagement::receiveKirjauduUlosFromMenu()
     arvo_1.clear();
     arvo_2.clear();
     arvo_3.clear();
-    tilintapahtumat.clear();
+    tilintapahtumat.clear();    
 
     qDebug() << "Taulu" << taulu;
 
     deleteManager();
+    pDllserialport->portinAvaus();
 }
 
 void dllmanagement::receiveRequestSaldoFromMenu()
@@ -230,4 +257,31 @@ void dllmanagement::receiveRequestTapahtumatFromMenu()
     painettunappi = "tapahtumat";
     taulu = "tapahtumat";
     getTiedot(taulu, tili);
+}
+
+void dllmanagement::receiveRequestNostoFromMenu()
+{
+    painettunappi = "nosto";
+    taulu = "tapahtumat";
+    getTiedot(taulu, tili);
+}
+
+void dllmanagement::receiveNostaMaaraFromNosto(double maara)
+{
+    pDllrestapi->sendNosto(tili.toInt(), maara);
+}
+
+void dllmanagement::receiveEiRahaaFromNosto()
+{
+    pilmoitus->eiRahaaIlmoitus();
+}
+
+void dllmanagement::receiveMenuTimer()
+{
+    pmenu->timer->start(30000);
+}
+
+void dllmanagement::receiveNostaTimerFromIlmoitus()
+{
+    pnosto->timer->start(10000);
 }

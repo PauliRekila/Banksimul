@@ -21,6 +21,7 @@ public:
     void pinIkkunaEngine();
     void lopeta();
     void virheIlmoitus(short);
+    void uloskirjautuminen();
 
 private slots:
     void on_b1_clicked();
@@ -53,6 +54,7 @@ private:
 
 signals:
     void signalToInterface(QString);
+    void kirjaudutaanUlos();
 };
 
 #endif // PINKYSELY_H

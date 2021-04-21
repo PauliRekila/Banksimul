@@ -9,13 +9,15 @@ class DLLSERIALPORT_EXPORT Dllserialport:public QObject
     Q_OBJECT
 public:
     Dllserialport(QObject * parent = nullptr);
-    ~Dllserialport();    
+    ~Dllserialport();
+    void portinAvaus();
 
 private:
     engine * pEngine;
 signals:
     void sendDataToExe(QString);
     void sendErrToExe();
+
 public slots:
     void receiveSignalFromEngine(QString);
     void receiveErrFromEngine();

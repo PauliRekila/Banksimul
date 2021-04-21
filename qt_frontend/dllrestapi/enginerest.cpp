@@ -55,7 +55,27 @@ void enginerest::kirjautuminen(QString korttinumero, QString pin)
     manager = new QNetworkAccessManager(this);
     reply = manager->post(request, login);
     connect(manager, SIGNAL(finished(QNetworkReply*)),
-    this, SLOT(receiveNetworkReplyKortti(QNetworkReply*)));
+            this, SLOT(receiveNetworkReplyKortti(QNetworkReply*)));
+}
+
+void enginerest::nosto(int idtili, double maara)
+{
+    qDebug() << "NOSTO" << idtili << maara;
+    QString site_url="http://localhost:3000/kortti/uusi_tapahtuma";
+    QString credentials="banksimul35:1234";
+    QNetworkRequest request((site_url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QByteArray data = credentials.toLocal8Bit().toBase64();
+    QString headerData = "Basic " + data;
+    request.setRawHeader( "Authorization", headerData.toLocal8Bit() );
+    QJsonObject obj;
+    obj["id"] = idtili;
+    obj["maara"] = -maara;
+    QJsonDocument doc(obj);
+    QByteArray uusiNosto = doc.toJson();
+    manager = new QNetworkAccessManager(this);
+    manager->post(request, uusiNosto);
+
 }
 
 void enginerest::receiveNetworkReplyKortti(QNetworkReply *)

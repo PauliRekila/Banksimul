@@ -16,6 +16,11 @@ Dllserialport::~Dllserialport()
     pEngine = nullptr;
 }
 
+void Dllserialport::portinAvaus()
+{
+    pEngine->avaaPortti();
+}
+
 
 void Dllserialport::receiveSignalFromEngine(QString data)
 {

@@ -22,9 +22,11 @@ private:
 signals:
     void sendSignalToExe(QString);
     void korttiLukittu();
+    void kirjauduUlosExeen();
 
 public slots:
     void receiveSignalFromEngine(QString);
+    void receiveKirjaudutaanUlosFromEngine();
 };
 
 #endif // PINDLL_H

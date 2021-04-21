@@ -19,10 +19,13 @@ public:
     void lopeta();
     void lukossaIlmoitus();
     void lukittuIlmoitus();
+    void eiRahaaIlmoitus();
 
 private:
     QTimer *timer;
     Ui::ilmoitus *ui;
+signals:
+    void nostaTimer();
 };
 
 #endif // ILMOITUS_H

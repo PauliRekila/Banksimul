@@ -18,6 +18,7 @@ public:
     ~menu();
     void tervetuloaAsiakas(QString);
     void lopeta();
+    QTimer *timer;
 
 private slots:
     void on_b_ulos_clicked();
@@ -25,14 +26,17 @@ private slots:
 
     void on_b_tilitapahtumia_clicked();
 
+    void on_b_nosta_clicked();
+
 private:
     Ui::menu *ui;
-    QTimer *timer;
+
 
 signals:
     void kirjauduUlos();
     void requestSaldo();
     void requestTapahtumat();
+    void requestNosto();
 };
 
 #endif // MENU_H

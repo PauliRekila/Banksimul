@@ -25,6 +25,8 @@ private slots:
 private:
     Ui::saldo *ui;
     QTimer *timer;
+signals:
+    void menuTimer();
 };
 
 #endif // SALDO_H

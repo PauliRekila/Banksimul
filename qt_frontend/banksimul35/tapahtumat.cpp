@@ -21,6 +21,7 @@ tapahtumat::~tapahtumat()
 
 void tapahtumat::lopeta()
 {
+    emit menuTimer();
     qDebug() << "Aika loppui";
     this->close();
     timer->stop();
