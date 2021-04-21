@@ -47,3 +47,9 @@ void menu::on_b_saldo_clicked()
     emit requestSaldo();
     timer->start(30000);
 }
+
+void menu::on_b_tilitapahtumia_clicked()
+{
+    emit requestTapahtumat();
+    timer->start(30000);
+}

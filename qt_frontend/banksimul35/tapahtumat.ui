@@ -29,6 +29,9 @@
        <property name="text">
         <string>TextLabel</string>
        </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
       </widget>
      </item>
      <item>
@@ -42,41 +45,29 @@
         <string>TextLabel</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_tapahtumat">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>350</height>
-        </size>
-       </property>
+      <widget class="QTextBrowser" name="tapahtumat_text">
        <property name="font">
         <font>
-         <pointsize>15</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;p&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       <property name="openLinks">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="b_edellinen">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>

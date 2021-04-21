@@ -23,6 +23,8 @@ private slots:
     void on_b_ulos_clicked();
     void on_b_saldo_clicked();
 
+    void on_b_tilitapahtumia_clicked();
+
 private:
     Ui::menu *ui;
     QTimer *timer;
@@ -30,6 +32,7 @@ private:
 signals:
     void kirjauduUlos();
     void requestSaldo();
+    void requestTapahtumat();
 };
 
 #endif // MENU_H

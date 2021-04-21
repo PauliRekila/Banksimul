@@ -31,16 +31,19 @@ void saldo::saldoIkkuna(QString asiakas, QString saldo, QStringList tapahtumat)
     ui->tapahtumat_text->clear();
     ui->label_nimi->setText(asiakas);
     ui->label_saldo->setText("Saldo: "+saldo+" €");
-    ui->tapahtumat_text->append(tapahtumat[0]);
-    ui->tapahtumat_text->append(tapahtumat[1]);
-    ui->tapahtumat_text->append(tapahtumat[2]);
-    ui->tapahtumat_text->append(tapahtumat[3]);
-    ui->tapahtumat_text->append(tapahtumat[4]);
-
+    if (tapahtumat.size() < 5){
+        for (int i = 0; i < tapahtumat.size(); ++i){
+            ui->tapahtumat_text->append(tapahtumat[i]);
+    }
+    }
+    else {
+        for (int i = 0; i < 5; ++i){
+            ui->tapahtumat_text->append(tapahtumat[i]);
+    }}
     timer->start(10000);
 
     this->exec();
-    this->close();
+
 }
 
 void saldo::on_b_poistu_clicked()
