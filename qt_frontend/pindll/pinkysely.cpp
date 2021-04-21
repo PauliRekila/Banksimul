@@ -11,7 +11,7 @@ pinkysely::pinkysely(QWidget *parent) :
     timer = new QTimer(this);
 
     connect(timer, &QTimer::timeout,
-            this, QOverload<>::of(&pinkysely::lopeta));
+            this, QOverload<>::of(&pinkysely::uloskirjautuminen));
 }
 
 pinkysely::~pinkysely()
@@ -44,6 +44,12 @@ void pinkysely::virheIlmoitus(short yritykset)
     QString jaljella = QString::number(yritysten_maara);
     ui->label_ohje->setText("Väärä PIN, "+jaljella+" yritystä jäljellä");
     ui->lineEdit_pin->clear();
+}
+
+void pinkysely::uloskirjautuminen()
+{
+    emit kirjaudutaanUlos();
+    lopeta();
 }
 
 void pinkysely::on_b_ok_clicked()

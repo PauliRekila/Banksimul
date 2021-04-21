@@ -15,8 +15,9 @@ class engine : public QObject
 {
     Q_OBJECT
 public:
-    explicit engine(QObject *parent = nullptr);
+    engine(QObject *parent = nullptr);
     ~engine();
+    void avaaPortti();
 
 public slots:
     void readData();

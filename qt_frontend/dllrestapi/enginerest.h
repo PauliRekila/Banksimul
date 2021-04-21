@@ -21,6 +21,7 @@ public:
     void tiedot(QString, QString);
     void lukitus(QString);
     void kirjautuminen(QString, QString);
+    void nosto(int, double);
     QNetworkAccessManager * manager;
 private:
     QNetworkReply * reply;

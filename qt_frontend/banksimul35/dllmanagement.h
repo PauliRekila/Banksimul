@@ -24,7 +24,7 @@ public:
     void getKortti(QString, QString);
     void getAsiakasNimi(QString);
     void pinAloitus();
-    void saldoTaiTapahtumat();
+    void saldoTaiTapahtumatTaiNosto();
 
     QString korttinumero;
     QString taulu;
@@ -56,6 +56,11 @@ public slots:
     void receiveKirjauduUlosFromMenu();
     void receiveRequestSaldoFromMenu();
     void receiveRequestTapahtumatFromMenu();
+    void receiveRequestNostoFromMenu();
+    void receiveNostaMaaraFromNosto(double);
+    void receiveEiRahaaFromNosto();
+    void receiveMenuTimer();
+    void receiveNostaTimerFromIlmoitus();
 
 };
 

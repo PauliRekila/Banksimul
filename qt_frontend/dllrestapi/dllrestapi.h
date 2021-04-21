@@ -14,6 +14,7 @@ public:
     void sendKortti(QString, QString);
     void sendLukitus(QString);
     void deleteManager();
+    void sendNosto(int, double);
 
 private:
     enginerest * penginerest;

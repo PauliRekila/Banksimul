@@ -21,6 +21,7 @@ saldo::~saldo()
 
 void saldo::lopeta()
 {
+    emit menuTimer();
     qDebug() << "Aika loppui";
     timer->stop();
     this->close();

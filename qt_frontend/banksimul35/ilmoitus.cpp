@@ -31,8 +31,7 @@ void ilmoitus::lukossaIlmoitus()
     timer->start(10000);
     ui->label_ilmoitus->setText("Kortti on lukittu, ota yhteyttä pankkiisi");
 
-    this->exec();
-    this->close();
+    this->exec();    
 }
 
 void ilmoitus::lukittuIlmoitus()
@@ -41,5 +40,13 @@ void ilmoitus::lukittuIlmoitus()
     ui->label_ilmoitus->setText("Liian monta yritystä, kortti lukittu");
 
     this->exec();
-    this->close();
+}
+
+void ilmoitus::eiRahaaIlmoitus()
+{
+    timer->start(10000);
+    ui->label_ilmoitus->setText("Tilillä ei ole katetta!");
+
+    this->exec();
+    emit nostaTimer();
 }

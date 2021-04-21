@@ -38,6 +38,11 @@ void Dllrestapi::deleteManager()
     penginerest->manager->deleteLater();
 }
 
+void Dllrestapi::sendNosto(int idtili, double maara)
+{
+    penginerest->nosto(idtili, maara);
+}
+
 void Dllrestapi::receiveKorttiFromEngine(QNetworkReply* reply)
 {
     emit sendKorttiToExe(reply);
