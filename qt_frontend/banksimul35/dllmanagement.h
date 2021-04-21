@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QStringList>
 #include "dllrestapi.h"
 #include "dllserialport.h"
 #include "pindll.h"
@@ -23,6 +24,7 @@ public:
     void getKortti(QString, QString);
     void getAsiakasNimi(QString);
     void pinAloitus();
+    void saldoTaiTapahtumat();
 
     QString korttinumero;
     QString taulu;
@@ -32,6 +34,8 @@ public:
     QString arvo_1;
     QString arvo_2;
     QString arvo_3;
+    QStringList tilintapahtumat;
+    QString painettunappi;
 
 private:
     Dllrestapi *pDllrestapi;

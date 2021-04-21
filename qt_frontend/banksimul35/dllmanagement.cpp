@@ -84,15 +84,26 @@ void dllmanagement::pinAloitus()
     getTiedot(taulu, korttinumero);
 }
 
+void dllmanagement::saldoTaiTapahtumat()
+{
+    if (painettunappi == "saldo"){
+        psaldo->saldoIkkuna(asiakas,tilinsaldo,tilintapahtumat);
+    }
+    else if (painettunappi == "tapahtumat"){
+
+    }
+}
+
 void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
 {
     QByteArray response_data=reply->readAll();
-    QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
-    QJsonObject json_obj = json_doc.object();
 
     qDebug() << "receiveFromrestapi";
 
     if(taulu == "kortti"){
+        QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+        QJsonObject json_obj = json_doc.object();
+
         tili = QString::number(json_obj["idtili"].toInt());
         arvo_2 = QString::number(json_obj["idasiakas"].toInt());
         arvo_3 = QString::number(json_obj["lukittu"].toInt());
@@ -105,15 +116,36 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
         }
     }
     else if (taulu == "asiakas") {
+        QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+        QJsonObject json_obj = json_doc.object();
+
         asiakas = json_obj["enimi"].toString()+" "+json_obj["snimi"].toString();
         ppindll->sendLopeta();
         pmenu->tervetuloaAsiakas(asiakas);
     }
     else if (taulu == "tili") {
+        QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+        QJsonObject json_obj = json_doc.object();
+
         tilinsaldo = QString::number(json_obj["saldo"].toDouble());
         qDebug() << "Saldo: " << tilinsaldo;
         qDebug() << "Tili: " << tili;
-        psaldo->saldoIkkuna(asiakas, tilinsaldo);
+        saldoTaiTapahtumat();
+    }
+    else if (taulu == "tapahtumat") {
+        QJsonDocument json_doc = QJsonDocument::fromJson(response_data);
+        QJsonObject json_obj = json_doc.object();
+        QJsonArray json_array = json_doc.array();
+        tilintapahtumat.clear();
+        foreach (const QJsonValue &value, json_array)
+        {
+            QJsonObject json_obj = value.toObject();
+            tilintapahtumat+= json_obj["paivays"].toString()+"\t"+QString::number(json_obj["maara"].toDouble())+"\t"+json_obj["tyyppi"].toString()+"\t"+json_obj["tilinumero"].toString()+"\r";
+        }
+        sort(tilintapahtumat.begin(), tilintapahtumat.end(), std::greater<QString>());
+        qDebug() << "Tilintapahtumat: " << tilintapahtumat;
+        taulu = "tili";
+        getTiedot(taulu, tili);
     }
     else {
         qDebug() << "Funktiot ei tapahdu" << taulu;
@@ -175,6 +207,7 @@ void dllmanagement::receiveKirjauduUlosFromMenu()
     arvo_1.clear();
     arvo_2.clear();
     arvo_3.clear();
+    tilintapahtumat.clear();
 
     qDebug() << "Taulu" << taulu;
 
@@ -183,8 +216,7 @@ void dllmanagement::receiveKirjauduUlosFromMenu()
 
 void dllmanagement::receiveRequestSaldoFromMenu()
 {
-    qDebug() << "Tili jo aiakasemiin: " << tili;
-    taulu = "tili";
+    painettunappi = "saldo";
+    taulu = "tapahtumat";
     getTiedot(taulu, tili);
-    //psaldo->saldoIkkuna(asiakas);
 }

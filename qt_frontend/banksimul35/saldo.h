@@ -17,7 +17,7 @@ public:
     saldo(QWidget *parent = nullptr);
     ~saldo();
     void lopeta();
-    void saldoIkkuna(QString, QString);
+    void saldoIkkuna(QString, QString, QStringList);
 
 private slots:
     void on_b_poistu_clicked();
