@@ -33,6 +33,9 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     connect(pmenu, SIGNAL(requestSaldo()),
             this, SLOT(receiveRequestSaldoFromMenu()));
 
+    connect(pmenu, SIGNAL(requestTapahtumat()),
+            this, SLOT(receiveRequestTapahtumatFromMenu()));
+
 }
 
 dllmanagement::~dllmanagement()
@@ -80,7 +83,8 @@ void dllmanagement::getAsiakasNimi(QString id)
 void dllmanagement::pinAloitus()
 {
     taulu = "kortti";
-    korttinumero = "60006235E";
+    korttinumero = "60006235E"; //Teppo
+    //korttinumero = "600064972"; //Maija
     getTiedot(taulu, korttinumero);
 }
 
@@ -90,7 +94,7 @@ void dllmanagement::saldoTaiTapahtumat()
         psaldo->saldoIkkuna(asiakas,tilinsaldo,tilintapahtumat);
     }
     else if (painettunappi == "tapahtumat"){
-
+        ptapahtumat->tapahtumatIkkuna(asiakas,tilinsaldo,tilintapahtumat);
     }
 }
 
@@ -217,6 +221,13 @@ void dllmanagement::receiveKirjauduUlosFromMenu()
 void dllmanagement::receiveRequestSaldoFromMenu()
 {
     painettunappi = "saldo";
+    taulu = "tapahtumat";
+    getTiedot(taulu, tili);
+}
+
+void dllmanagement::receiveRequestTapahtumatFromMenu()
+{
+    painettunappi = "tapahtumat";
     taulu = "tapahtumat";
     getTiedot(taulu, tili);
 }

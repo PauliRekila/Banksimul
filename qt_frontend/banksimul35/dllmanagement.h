@@ -55,6 +55,7 @@ public slots:
     void receiveDataFromSerialport(QString);
     void receiveKirjauduUlosFromMenu();
     void receiveRequestSaldoFromMenu();
+    void receiveRequestTapahtumatFromMenu();
 
 };
 
