@@ -7,7 +7,8 @@ enginerest::enginerest(QObject *parent) : QObject(parent)
 
 void enginerest::tiedot(QString taulu, QString id)
 {
-    qDebug() << "Toimiiko yhteys" << taulu << id;
+/*KÄYTETÄÄN ASIAKKAAN TIETOJEN HAKEMISEEN*/
+
     QString site_url="http://localhost:3000/"+taulu+"/"+id;
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
@@ -23,6 +24,8 @@ void enginerest::tiedot(QString taulu, QString id)
 
 void enginerest::lukitus(QString korttinumero)
 {
+/*KÄYTETÄÄN KORTIN LUKITSEMISEEN JOS PIN ON VÄÄRIN*/
+
     QString site_url="http://localhost:3000/kortti/"+korttinumero;
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
@@ -40,6 +43,8 @@ void enginerest::lukitus(QString korttinumero)
 
 void enginerest::kirjautuminen(QString korttinumero, QString pin)
 {
+/*KÄYTETÄÄN SISÄÄNKIRJAUTUMISEEN*/
+
     QString site_url="http://localhost:3000/login";
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
@@ -60,7 +65,8 @@ void enginerest::kirjautuminen(QString korttinumero, QString pin)
 
 void enginerest::nosto(int idtili, double maara)
 {
-    qDebug() << "NOSTO" << idtili << maara;
+/*LISÄÄ UUDEN NOSTOTAPAHTUMAN*/
+
     QString site_url="http://localhost:3000/kortti/uusi_tapahtuma";
     QString credentials="banksimul35:1234";
     QNetworkRequest request((site_url));
@@ -86,5 +92,4 @@ void enginerest::receiveNetworkReplyKortti(QNetworkReply *)
 void enginerest::receiveNetworkReplyTiedot(QNetworkReply *reply)
 {
     emit sendTiedotToInterface(reply);
-    qDebug() << "QReply: " << reply;
 }

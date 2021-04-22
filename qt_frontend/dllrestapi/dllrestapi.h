@@ -7,6 +7,7 @@
 class DLLRESTAPI_EXPORT Dllrestapi : public QObject
 {
     Q_OBJECT
+
 public:
     Dllrestapi(QObject *parent = nullptr);
     ~Dllrestapi();
@@ -18,6 +19,7 @@ public:
 
 private:
     enginerest * penginerest;
+
 public slots:
     void receiveTiedotFromEngine(QNetworkReply*);
     void receiveKorttiFromEngine(QNetworkReply*);
