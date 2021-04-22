@@ -31,7 +31,6 @@ public:
     QString asiakas;
     QString tili;
     QString tilinsaldo;
-    QString arvo_1;
     QString arvo_2;
     QString arvo_3;
     QStringList tilintapahtumat;

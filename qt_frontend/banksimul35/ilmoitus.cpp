@@ -10,43 +10,52 @@ ilmoitus::ilmoitus(QWidget *parent) :
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&ilmoitus::lopeta));
+
 }
 
 ilmoitus::~ilmoitus()
 {
     delete ui;
+    ui = nullptr;
     delete timer;
     timer = nullptr;
 }
 
 void ilmoitus::lopeta()
 {
-    qDebug() << "Aika loppui";
+/* SULKEE ILMOITUKSEN JA LOPETTAA TIMERIN*/
+
     this->close();
     timer->stop();
 }
 
 void ilmoitus::lukossaIlmoitus()
 {
+/* AVAA ILMOITUKSEN, JOKA ILMOITTAA, ETTÄ KORTTI ON LUKOSSA, JA ALOITTAA TIMERIN */
+
     timer->start(10000);
     ui->label_ilmoitus->setText("Kortti on lukittu, ota yhteyttä pankkiisi");
 
-    this->exec();    
+    showFullScreen();
 }
 
 void ilmoitus::lukittuIlmoitus()
 {
+/* AVAA ILMOITUKSEN, JA ALOITTAA TIMERIN */
+
     timer->start(10000);
     ui->label_ilmoitus->setText("Liian monta yritystä, kortti lukittu");
 
-    this->exec();
+    showFullScreen();
 }
 
 void ilmoitus::eiRahaaIlmoitus()
 {
+/* AVAA ILMOITUKSEN, ALOITTAA TIMERIN, SEKÄ EMITTAA SIGNAALIN*/
+
     timer->start(10000);
     ui->label_ilmoitus->setText("Tilillä ei ole katetta!");
 
-    this->exec();
+    showFullScreen();
     emit nostaTimer();
 }

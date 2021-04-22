@@ -23,14 +23,11 @@ public:
 private slots:
     void on_b_ulos_clicked();
     void on_b_saldo_clicked();
-
     void on_b_tilitapahtumia_clicked();
-
     void on_b_nosta_clicked();
 
 private:
     Ui::menu *ui;
-
 
 signals:
     void kirjauduUlos();

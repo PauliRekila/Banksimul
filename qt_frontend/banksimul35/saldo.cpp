@@ -10,11 +10,13 @@ saldo::saldo(QWidget *parent) :
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&saldo::lopeta));
+
 }
 
 saldo::~saldo()
 {
     delete ui;
+    ui = nullptr;
     delete timer;
     timer = nullptr;
 }
@@ -22,29 +24,39 @@ saldo::~saldo()
 void saldo::lopeta()
 {
     emit menuTimer();
-    qDebug() << "Aika loppui";
     timer->stop();
     this->close();
 }
 
 void saldo::saldoIkkuna(QString asiakas, QString saldo, QStringList tapahtumat)
 {
+/* KIRJOITETAAN KÄYTTÄJÄN NIMI JA SALDO */
+
     ui->tapahtumat_text->clear();
     ui->label_nimi->setText(asiakas);
     ui->label_saldo->setText("Saldo: "+saldo+" €");
-    if (tapahtumat.size() < 5){
-        for (int i = 0; i < tapahtumat.size(); ++i){
+
+/* VERRATAAN LISTAN KOKOA. JOS SE ON ALLE 5, NÄYTETÄÄN KAIKKI TAPAHTUMAT. MUUSSA TAPAUKSISSA NÄYTETÄÄN VAIN 5 */
+
+    if (tapahtumat.size() < 5)
+    {
+        for (int i = 0; i < tapahtumat.size(); ++i)
+        {
             ui->tapahtumat_text->append(tapahtumat[i]);
+        }
     }
-    }
-    else {
-        for (int i = 0; i < 5; ++i){
+
+    else
+    {
+        for (int i = 0; i < 5; ++i)
+        {
             ui->tapahtumat_text->append(tapahtumat[i]);
-    }}
+        }
+    }
+
     timer->start(10000);
 
-    this->exec();
-
+    showFullScreen();
 }
 
 void saldo::on_b_poistu_clicked()

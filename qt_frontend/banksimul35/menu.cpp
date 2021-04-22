@@ -20,18 +20,17 @@ menu::~menu()
 }
 
 void menu::tervetuloaAsiakas(QString asiakas)
-{   
+{
+/* KIRJOITTAA ASIAKKAAN NIMEN JA AVAA IKKUNAN */
     ui->label_menu->setText("Tervetuloa, " + asiakas);
 
     timer->start(10000);
 
-    this->exec();
-    this->close();
+    showFullScreen();
 }
 
 void menu::lopeta()
 {
-    qDebug() << "Aika loppui";
     emit kirjauduUlos();
     this->close();
     timer->stop();
