@@ -14,6 +14,7 @@ public:
 
 private:
     engine * pEngine;
+
 signals:
     void sendDataToExe(QString);
     void sendErrToExe();

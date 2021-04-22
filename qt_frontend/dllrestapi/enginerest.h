@@ -6,9 +6,9 @@
 #include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
+#include <QNetworkReply>
 #include <QJsonDocument>
 #include <QByteArray>
-#include <QNetworkReply>
 #include <QJsonArray>
 #include <QJsonObject>
 
@@ -16,6 +16,7 @@
 class enginerest : public QObject
 {
     Q_OBJECT
+
 public:
     enginerest(QObject *parent = nullptr);
     void tiedot(QString, QString);
@@ -23,6 +24,7 @@ public:
     void kirjautuminen(QString, QString);
     void nosto(int, double);
     QNetworkAccessManager * manager;
+
 private:
     QNetworkReply * reply;
 
@@ -33,7 +35,6 @@ signals:
 public slots:
     void receiveNetworkReplyTiedot(QNetworkReply*);
     void receiveNetworkReplyKortti(QNetworkReply*);
-
 
 };
 

@@ -13,14 +13,13 @@ Dllrestapi::Dllrestapi(QObject *parent) : QObject(parent)
 
 Dllrestapi::~Dllrestapi()
 {
-   delete penginerest;
+    delete penginerest;
     penginerest = nullptr;
 }
 
 void Dllrestapi::sendTiedot(QString taulu, QString id)
 {
     penginerest->tiedot(taulu, id);
-    qDebug() << "Interface: " << taulu << id;
 }
 
 void Dllrestapi::sendKortti(QString korttinumero, QString pin)
@@ -50,6 +49,5 @@ void Dllrestapi::receiveKorttiFromEngine(QNetworkReply* reply)
 
 void Dllrestapi::receiveTiedotFromEngine(QNetworkReply* reply)
 {
-    qDebug() << "Tiedot from engine";
     emit sendTiedotToExe(reply);
 }

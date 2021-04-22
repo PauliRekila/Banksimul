@@ -21,6 +21,7 @@ public:
 
 public slots:
     void readData();
+
 private:
     QSerialPort * pQSerialPort;    
 
