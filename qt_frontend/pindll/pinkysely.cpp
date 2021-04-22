@@ -7,20 +7,25 @@ pinkysely::pinkysely(QWidget *parent) :
     ui(new Ui::pinkysely)
 {
     ui->setupUi(this);
-
     timer = new QTimer(this);
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&pinkysely::uloskirjautuminen));
+
+    showFullScreen();
 }
 
 pinkysely::~pinkysely()
 {
     delete ui;
+    ui = nullptr;
 }
 
 void pinkysely::pinIkkunaEngine()
 {
+/* ALUSTAA DIALOGIN OHJETEKSTILLÄ JA ALOITTAA
+   AKTIIVISUUDEN LASKEMISEN QTIMERILLA */
+
     ui->lineEdit_pin->clear();
     ui->label_ohje->setText("SYÖTÄ PIN-KOODI");
 
@@ -54,12 +59,14 @@ void pinkysely::uloskirjautuminen()
 
 void pinkysely::on_b_ok_clicked()
 {
+/* OTTAA SYÖTETYN NUMEROSARJAN,
+   JA JOS SE ON 4 MERKKIÄ PITKÄ,
+   LÄHETTÄÄ SEN ETEENPÄIN */
 
     if (ui->lineEdit_pin->text().length() == 4)
     {
       QString pin = ui->lineEdit_pin->text();
       emit signalToInterface(pin);
-      qDebug() << "tunnusluku on:" << pin;
       timer->stop();
     }
     else
@@ -69,6 +76,14 @@ void pinkysely::on_b_ok_clicked()
     }
 
      ui->lineEdit_pin->clear();
+}
+
+void pinkysely::on_b_c_clicked()
+{
+/* PYYHKII VIIMEISIMMÄN NUMERON */
+
+    ui->lineEdit_pin->backspace();
+    timer->start(10000);
 }
 
 void pinkysely::on_b1_clicked()
@@ -122,12 +137,6 @@ void pinkysely::on_b8_clicked()
 void pinkysely::on_b9_clicked()
 {
     ui->lineEdit_pin->insert("9");
-    timer->start(10000);
-}
-
-void pinkysely::on_b_c_clicked()
-{
-    ui->lineEdit_pin->backspace();
     timer->start(10000);
 }
 
