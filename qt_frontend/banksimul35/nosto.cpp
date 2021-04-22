@@ -10,11 +10,13 @@ nosto::nosto(QWidget *parent) :
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&nosto::lopeta));
+
 }
 
 nosto::~nosto()
 {
     delete ui;
+    ui = nullptr;
     delete timer;
     timer = nullptr;
 }
@@ -22,37 +24,40 @@ nosto::~nosto()
 void nosto::lopeta()
 {
     emit menuTimer();
-    qDebug() << "Aika loppui";
     this->close();
     timer->stop();
 }
 
 void nosto::nostoIkkuna(QString asiakas, QString saldo)
 {
+/* TALLENTAA SALDON MUUTTUJAAN, KIRJOITTAA ASIAKKAAN NIMEN JA SALDON JA AVAA IKKUNAN */
+
     saldomaara = saldo.toDouble();
-    qDebug() << saldomaara << "saldomaara";
+
     ui->label_tiedot->setText(asiakas);
     ui->label_saldo->setText("Saldo: "+saldo+" €");
+
     timer->start(10000);
-    this->exec();
 
+    showFullScreen();
 }
-
-
 
 void nosto::on_b_sulje_clicked()
 {
     lopeta();
 }
 
+/* ALLA OLEVAT SLOTIT TARKISTAVAT ONKO NOSTETTAVA MÄÄRÄ PIENEMPI KUIN SALDOMAARA */
+
 void nosto::on_b_20_clicked()
 {
     timer->stop();
-    if (saldomaara <20){
+    if (saldomaara <20)
+    {
         emit eiRahaa();
-
     }
-    else {
+    else
+    {
         emit nostaMaara(20);
         lopeta();
     }
@@ -61,11 +66,12 @@ void nosto::on_b_20_clicked()
 void nosto::on_b_40_clicked()
 {
     timer->stop();
-    if (saldomaara <40){
+    if (saldomaara <40)
+    {
         emit eiRahaa();
-
     }
-    else {
+    else
+    {
         emit nostaMaara(40);
         lopeta();
     }
@@ -74,11 +80,12 @@ void nosto::on_b_40_clicked()
 void nosto::on_b_60_clicked()
 {
     timer->stop();
-    if (saldomaara <60){
+    if (saldomaara <60)
+    {
         emit eiRahaa();
-
     }
-    else {
+    else
+    {
         emit nostaMaara(60);
         lopeta();
     }
@@ -87,11 +94,12 @@ void nosto::on_b_60_clicked()
 void nosto::on_b_100_clicked()
 {
     timer->stop();
-    if (saldomaara <100){
+    if (saldomaara <100)
+    {
         emit eiRahaa();
-
     }
-    else {
+    else
+    {
         emit nostaMaara(100);
         lopeta();
     }
@@ -100,11 +108,12 @@ void nosto::on_b_100_clicked()
 void nosto::on_b_200_clicked()
 {
     timer->stop();
-    if (saldomaara <200){
+    if (saldomaara <200)
+    {
         emit eiRahaa();
-
     }
-    else {
+    else
+    {
         emit nostaMaara(200);
         lopeta();
     }
@@ -113,11 +122,12 @@ void nosto::on_b_200_clicked()
 void nosto::on_b_500_clicked()
 {
     timer->stop();
-    if (saldomaara <500){
+    if (saldomaara <500)
+    {
         emit eiRahaa();
-
     }
-    else {
+    else
+    {
         emit nostaMaara(500);
         lopeta();
     }

@@ -14,7 +14,7 @@ class ilmoitus : public QDialog
     Q_OBJECT
 
 public:
-    explicit ilmoitus(QWidget *parent = nullptr);
+    ilmoitus(QWidget *parent = nullptr);
     ~ilmoitus();
     void lopeta();
     void lukossaIlmoitus();
@@ -24,6 +24,7 @@ public:
 private:
     QTimer *timer;
     Ui::ilmoitus *ui;
+
 signals:
     void nostaTimer();
 };

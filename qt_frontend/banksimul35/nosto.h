@@ -23,17 +23,11 @@ public:
 
 private slots:
     void on_b_sulje_clicked();
-
     void on_b_20_clicked();
-
     void on_b_40_clicked();
-
     void on_b_60_clicked();
-
     void on_b_100_clicked();
-
     void on_b_200_clicked();
-
     void on_b_500_clicked();
 
 private:

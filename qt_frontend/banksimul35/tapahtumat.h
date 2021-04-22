@@ -18,20 +18,20 @@ public:
     ~tapahtumat();
     void lopeta();
     void tapahtumatIkkuna(QString, QString, QStringList);
+
     unsigned int sivu = 0;
     int sivu2;
     QStringList selaustapahtumat;
 
 private slots:
     void on_b_sulje_clicked();
-
     void on_b_seuraava_clicked();
-
     void on_b_edellinen_clicked();
 
 private:
     Ui::tapahtumat *ui;
     QTimer *timer;
+
 signals:
     void menuTimer();
 };

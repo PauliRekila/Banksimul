@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "menu.h"
-#include <QDialog>
-#include "dllmanagement.h"
 #include <QTimer>
 #include <QDebug>
+#include <QDialog>
+#include "menu.h"
+#include "dllmanagement.h"
 #include "dllserialport.h"
 
 QT_BEGIN_NAMESPACE
@@ -22,17 +22,20 @@ public:
     ~MainWindow();
     void lopeta();
     void kirjauduUlos();
+
 private slots:
     void on_pushButton_clicked();
+
 public slots:
     void receiveDataFromSerial(QString);
     void receiveErrFromSerial();
+
 private:
     Ui::MainWindow *ui;
+    QTimer *timer;
     menu *pmenu;
     Pindll *ppindll;
-    dllmanagement *pdllm;
-    QTimer *timer;
+    dllmanagement *pdllm;  
     Dllserialport *prfid;
 
 };
