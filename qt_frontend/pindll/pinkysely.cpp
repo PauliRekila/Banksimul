@@ -11,8 +11,6 @@ pinkysely::pinkysely(QWidget *parent) :
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&pinkysely::uloskirjautuminen));
-
-    showFullScreen();
 }
 
 pinkysely::~pinkysely()
@@ -23,21 +21,18 @@ pinkysely::~pinkysely()
 
 void pinkysely::pinIkkunaEngine()
 {
-/* ALUSTAA DIALOGIN OHJETEKSTILLÄ JA ALOITTAA
-   AKTIIVISUUDEN LASKEMISEN QTIMERILLA */
+/* ALUSTAA DIALOGIN OHJETEKSTILLÄ JA ALOITTAA AKTIIVISUUDEN LASKEMISEN QTIMERILLA */
 
     ui->lineEdit_pin->clear();
     ui->label_ohje->setText("SYÖTÄ PIN-KOODI");
 
     timer->start(10000);
 
-    this->exec();
-    this->close();
+    showFullScreen();
 }
 
 void pinkysely::lopeta()
 {
-    qDebug() << "Aika loppui";
     ui->lineEdit_pin->clear();
     this->close();
     timer->stop();
@@ -59,9 +54,7 @@ void pinkysely::uloskirjautuminen()
 
 void pinkysely::on_b_ok_clicked()
 {
-/* OTTAA SYÖTETYN NUMEROSARJAN,
-   JA JOS SE ON 4 MERKKIÄ PITKÄ,
-   LÄHETTÄÄ SEN ETEENPÄIN */
+/* OTTAA SYÖTETYN NUMEROSARJAN JA JOS SE ON 4 MERKKIÄ PITKÄ LÄHETTÄÄ SEN ETEENPÄIN */
 
     if (ui->lineEdit_pin->text().length() == 4)
     {
