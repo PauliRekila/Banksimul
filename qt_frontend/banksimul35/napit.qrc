@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix">
+        <file>icons/alas.png</file>
+        <file>icons/ylos.png</file>
+    </qresource>
+</RCC>

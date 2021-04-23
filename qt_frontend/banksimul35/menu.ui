@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(0, 85, 127);</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -23,8 +26,11 @@
          <pointsize>26</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
        <property name="frameShape">
-        <enum>QFrame::Box</enum>
+        <enum>QFrame::NoFrame</enum>
        </property>
        <property name="text">
         <string/>
@@ -68,6 +74,10 @@
            <pointsize>15</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(49, 98, 147);</string>
+         </property>
          <property name="text">
           <string>Näytä 
 Saldo</string>
@@ -92,6 +102,10 @@ Saldo</string>
           <font>
            <pointsize>15</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(49, 98, 147);</string>
          </property>
          <property name="text">
           <string>Selaa 
@@ -118,6 +132,10 @@ Tilitapahtumia</string>
            <pointsize>15</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(49, 98, 147);</string>
+         </property>
          <property name="text">
           <string>Nosta 
 Rahaa</string>
@@ -142,6 +160,10 @@ Rahaa</string>
           <font>
            <pointsize>15</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(49, 98, 147);</string>
          </property>
          <property name="text">
           <string>Kirjaudu 
