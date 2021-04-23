@@ -10,7 +10,6 @@ tapahtumat::tapahtumat(QWidget *parent) :
 
     connect(timer, &QTimer::timeout,
             this, QOverload<>::of(&tapahtumat::lopeta));
-
 }
 
 tapahtumat::~tapahtumat()

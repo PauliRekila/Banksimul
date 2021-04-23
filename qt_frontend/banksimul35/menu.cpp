@@ -24,7 +24,7 @@ void menu::tervetuloaAsiakas(QString asiakas)
 /* KIRJOITTAA ASIAKKAAN NIMEN JA AVAA IKKUNAN */
     ui->label_menu->setText("Tervetuloa, " + asiakas);
 
-    timer->start(10000);
+    timer->start(30000);
 
     showFullScreen();
 }

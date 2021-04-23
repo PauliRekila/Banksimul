@@ -173,7 +173,9 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
         foreach (const QJsonValue &value, json_array)
         {
             QJsonObject json_obj = value.toObject();
-            tilintapahtumat+= json_obj["paivays"].toString()+"\t"+QString::number(json_obj["maara"].toDouble())+"\t"+json_obj["tyyppi"].toString()+"\t"+json_obj["tilinumero"].toString()+"\r";
+            tilintapahtumat+= json_obj["paivays"].toString()+"\t"+QString::number(json_obj["maara"].toDouble())+"\t"+json_obj["tyyppi"].toString()+"\t\t"+json_obj["tilinumero"].toString()+"\r";
+            tilintapahtumat.replaceInStrings("T", " ");
+            tilintapahtumat.replaceInStrings(".000Z", "");
         }
 
 /* LAJITTELEE TAPAHTUMAT SITEN, ETTÄ UUSIMMAT TAPAHTUMAT OVAT ENSIMMÄISENÄ LISTASSA */
