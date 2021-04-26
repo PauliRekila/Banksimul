@@ -7,7 +7,7 @@ enginerest::enginerest(QObject *parent) : QObject(parent)
 
 void enginerest::tiedot(QString taulu, QString id)
 {
-/*KÄYTETÄÄN ASIAKKAAN TIETOJEN HAKEMISEEN*/
+/* KÄYTETÄÄN ASIAKKAAN TIETOJEN HAKEMISEEN */
 
     QString site_url="http://localhost:3000/"+taulu+"/"+id;
     QString credentials="banksimul35:1234";
@@ -24,7 +24,7 @@ void enginerest::tiedot(QString taulu, QString id)
 
 void enginerest::lukitus(QString korttinumero)
 {
-/*KÄYTETÄÄN KORTIN LUKITSEMISEEN JOS PIN ON VÄÄRIN*/
+/* KÄYTETÄÄN KORTIN LUKITSEMISEEN JOS PIN ON VÄÄRIN */
 
     QString site_url="http://localhost:3000/kortti/"+korttinumero;
     QString credentials="banksimul35:1234";
@@ -43,7 +43,7 @@ void enginerest::lukitus(QString korttinumero)
 
 void enginerest::kirjautuminen(QString korttinumero, QString pin)
 {
-/*KÄYTETÄÄN SISÄÄNKIRJAUTUMISEEN*/
+/* KÄYTETÄÄN SISÄÄNKIRJAUTUMISEEN */
 
     QString site_url="http://localhost:3000/login";
     QString credentials="banksimul35:1234";
@@ -65,7 +65,7 @@ void enginerest::kirjautuminen(QString korttinumero, QString pin)
 
 void enginerest::nosto(int idtili, double maara)
 {
-/*LISÄÄ UUDEN NOSTOTAPAHTUMAN*/
+/* LISÄÄ UUDEN NOSTOTAPAHTUMAN */
 
     QString site_url="http://localhost:3000/kortti/uusi_tapahtuma";
     QString credentials="banksimul35:1234";
@@ -81,7 +81,25 @@ void enginerest::nosto(int idtili, double maara)
     QByteArray uusiNosto = doc.toJson();
     manager = new QNetworkAccessManager(this);
     manager->post(request, uusiNosto);
+}
 
+void enginerest::sendKameraEngine(QString path)
+{
+/* LISÄÄ KUVAN POLUN TIETOKANTAAN */
+
+    QString site_url="http://localhost:3000/kamera";
+    QString credentials="banksimul35:1234";
+    QNetworkRequest request((site_url));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QByteArray data = credentials.toLocal8Bit().toBase64();
+    QString headerData = "Basic " + data;
+    request.setRawHeader( "Authorization", headerData.toLocal8Bit() );
+    QJsonObject obj;
+    obj["polku"] = path;
+    QJsonDocument doc(obj);
+    QByteArray kpolku = doc.toJson();
+    manager = new QNetworkAccessManager(this);
+    reply = manager->post(request, kpolku);
 }
 
 void enginerest::receiveNetworkReplyKortti(QNetworkReply *)

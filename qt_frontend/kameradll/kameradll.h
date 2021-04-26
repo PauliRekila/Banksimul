@@ -11,10 +11,13 @@ public:
     Kameradll(QObject *parent = nullptr);
     ~Kameradll();
     void otaKuva();
+
 private:
     enginekamera *penginekamera;
+
 public slots:
     void saved(QString);
+
 signals:
     void sendPathToExe(QString);
 };

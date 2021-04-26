@@ -92,14 +92,6 @@ void dllmanagement::getAsiakasNimi(QString id)
     getTiedot(taulu, id);
 }
 
-void dllmanagement::pinAloitus()
-{
-    taulu = "kortti";
-    korttinumero = "60006235E"; //Teppo
-    //korttinumero = "600064972"; //Maija
-    getTiedot(taulu, korttinumero);
-}
-
 void dllmanagement::saldoTaiTapahtumatTaiNosto()
 {
 /* RIIPPUEN SIITÄ MITÄ NAPPIA PAINETTIIN MENUSSA KÄYNNISTETÄÄN ERI IKKUNA */
@@ -118,11 +110,6 @@ void dllmanagement::saldoTaiTapahtumatTaiNosto()
     {
         pnosto->nostoIkkuna(asiakas, tilinsaldo);
     }
-}
-
-void dllmanagement::kameraAloitus()
-{
-    pkameradll->otaKuva();
 }
 
 void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
@@ -144,12 +131,14 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
 
         if(arvo_3 == "0")
         {
-            ppindll->pinIkkuna();
+            ppindll->pinIkkuna();            
         }
         else
         {
             pilmoitus->lukossaIlmoitus();
         }
+
+        pkameradll->otaKuva();
     }
 
     else if (taulu == "asiakas")
@@ -309,10 +298,10 @@ void dllmanagement::receiveMenuTimer()
 
 void dllmanagement::receiveNostaTimerFromIlmoitus()
 {
-    pnosto->timer->start(10000);
+    pnosto->timer->start(20000);
 }
 
 void dllmanagement::receivePathFromKameradll(QString path)
 {
-    qDebug() << path;
+    pDllrestapi->sendKameraPath(path);
 }

@@ -14,6 +14,7 @@ public:
     enginekamera(QObject *parent = nullptr);
     ~enginekamera();
     void otaKuvaEngine();
+
 public slots:
     void pathSaved(int,QString);
 

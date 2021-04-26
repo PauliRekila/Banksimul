@@ -24,9 +24,7 @@ public:
     void getTiedot(QString, QString);
     void getKortti(QString, QString);
     void getAsiakasNimi(QString);
-    void pinAloitus();
     void saldoTaiTapahtumatTaiNosto();
-    void kameraAloitus();
 
     QString korttinumero;
     QString taulu;

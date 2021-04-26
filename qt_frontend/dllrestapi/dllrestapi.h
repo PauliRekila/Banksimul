@@ -16,6 +16,7 @@ public:
     void sendLukitus(QString);
     void deleteManager();
     void sendNosto(int, double);
+    void sendKameraPath(QString);
 
 private:
     enginerest * penginerest;

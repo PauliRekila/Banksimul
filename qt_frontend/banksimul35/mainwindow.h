@@ -23,9 +23,6 @@ public:
     void lopeta();
     void kirjauduUlos();
 
-private slots:
-    void on_pushButton_clicked();
-
 public slots:
     void receiveDataFromSerial(QString);
     void receiveErrFromSerial();
