@@ -12,6 +12,7 @@
 #include "nosto.h"
 #include "saldo.h"
 #include "tapahtumat.h"
+#include "kameradll.h"
 
 class dllmanagement : public QObject
 {
@@ -25,6 +26,7 @@ public:
     void getAsiakasNimi(QString);
     void pinAloitus();
     void saldoTaiTapahtumatTaiNosto();
+    void kameraAloitus();
 
     QString korttinumero;
     QString taulu;
@@ -40,6 +42,7 @@ private:
     Dllrestapi *pDllrestapi;
     Dllserialport *pDllserialport;
     Pindll *ppindll;
+    Kameradll *pkameradll;
     menu *pmenu;
     ilmoitus *pilmoitus;
     nosto *pnosto;
@@ -60,6 +63,7 @@ public slots:
     void receiveEiRahaaFromNosto();
     void receiveMenuTimer();
     void receiveNostaTimerFromIlmoitus();
+    void receivePathFromKameradll(QString);
 
 };
 

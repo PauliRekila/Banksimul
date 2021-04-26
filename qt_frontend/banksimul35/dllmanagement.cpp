@@ -5,6 +5,7 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     pDllrestapi = new Dllrestapi;
     pDllserialport = new Dllserialport;
     ppindll = new Pindll;
+    pkameradll = new Kameradll;
 
     pmenu = new menu;
     pilmoitus = new ilmoitus;
@@ -44,6 +45,8 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
             this, SLOT(receiveNostaTimerFromIlmoitus()));
     connect(ppindll, SIGNAL(kirjauduUlosExeen()),
             this, SLOT(receiveKirjauduUlosFromMenu()));
+    connect(pkameradll, SIGNAL(sendPathToExe(QString)),
+            this, SLOT(receivePathFromKameradll(QString)));
 }
 
 dllmanagement::~dllmanagement()
@@ -54,6 +57,8 @@ dllmanagement::~dllmanagement()
     pDllserialport = nullptr;
     delete ppindll;
     ppindll = nullptr;
+    delete pkameradll;
+    pkameradll = nullptr;
     delete pmenu;
     pmenu = nullptr;
     delete pilmoitus;
@@ -113,6 +118,11 @@ void dllmanagement::saldoTaiTapahtumatTaiNosto()
     {
         pnosto->nostoIkkuna(asiakas, tilinsaldo);
     }
+}
+
+void dllmanagement::kameraAloitus()
+{
+    pkameradll->otaKuva();
 }
 
 void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
@@ -300,4 +310,9 @@ void dllmanagement::receiveMenuTimer()
 void dllmanagement::receiveNostaTimerFromIlmoitus()
 {
     pnosto->timer->start(10000);
+}
+
+void dllmanagement::receivePathFromKameradll(QString path)
+{
+    qDebug() << path;
 }

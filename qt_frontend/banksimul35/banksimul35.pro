@@ -1,6 +1,7 @@
 QT       += core gui
 QT += network
 QT += serialport
+QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -43,20 +44,25 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 
-win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/debug/ -ldllrestapi
+win32: LIBS += -L$$PWD/../build-dllrestapi-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -ldllrestapi
 
 INCLUDEPATH += $$PWD/../dllrestapi
 DEPENDPATH += $$PWD/../dllrestapi
 
-win32: LIBS += -L$$PWD/../build-dllserialport-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/debug/ -ldllserialport
+win32: LIBS += -L$$PWD/../build-dllserialport-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -ldllserialport
 
 INCLUDEPATH += $$PWD/../dllserialport
 DEPENDPATH += $$PWD/../dllserialport
 
-win32: LIBS += -L$$PWD/../build-pindll-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/debug/ -lpindll
+win32: LIBS += -L$$PWD/../build-pindll-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -lpindll
 
 INCLUDEPATH += $$PWD/../pindll
 DEPENDPATH += $$PWD/../pindll
 
 RESOURCES += \
     napit.qrc
+
+win32: LIBS += -L$$PWD/../build-kameradll-Desktop_Qt_5_15_0_MinGW_32_bit-Debug/debug/ -lkameradll
+
+INCLUDEPATH += $$PWD/../kameradll
+DEPENDPATH += $$PWD/../kameradll
