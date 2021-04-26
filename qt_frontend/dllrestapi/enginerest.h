@@ -23,7 +23,8 @@ public:
     void lukitus(QString);
     void kirjautuminen(QString, QString);
     void nosto(int, double);
-    QNetworkAccessManager * manager;
+    void sendKameraEngine(QString);
+    QNetworkAccessManager * manager;    
 
 private:
     QNetworkReply * reply;

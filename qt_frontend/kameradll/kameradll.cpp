@@ -3,7 +3,8 @@
 Kameradll::Kameradll(QObject *parent) : QObject(parent)
 {
     penginekamera = new enginekamera;
-    connect(penginekamera, SIGNAL(pathToInterface(QString)), this,SLOT(saved(QString)));
+    connect(penginekamera, SIGNAL(pathToInterface(QString)),
+            this,SLOT(saved(QString)));
 }
 
 Kameradll::~Kameradll()
@@ -19,5 +20,6 @@ void Kameradll::otaKuva()
 
 void Kameradll::saved(QString path)
 {
+/* LÄHETTÄÄ KUVAN TIEDOSTOPOLUN EXEEN */
     emit sendPathToExe(path);
 }

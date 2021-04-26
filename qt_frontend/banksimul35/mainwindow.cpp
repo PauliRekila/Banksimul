@@ -52,13 +52,6 @@ void MainWindow::kirjauduUlos()
     prfid = new Dllserialport;
 }
 
-
-void MainWindow::on_pushButton_clicked()
-{
-   // pdllm->pinAloitus();
-    pdllm->kameraAloitus();
-}
-
 void MainWindow::receiveDataFromSerial(QString)
 {
 /* TUHOAA OLION, KUN KORTTI ONNISTUNEESTI LUETTU, JOTTA RFID-LUKIJA EI JATKA LUKEMISTA TAUSTALLA */
