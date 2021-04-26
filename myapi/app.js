@@ -9,6 +9,7 @@ var korttiRouter = require('./routes/kortti');
 var tiliRouter = require('./routes/tili');
 var tapahtumatRouter = require('./routes/tapahtumat');
 var loginRouter = require('./routes/login');
+var kameraRouter = require('./routes/kamera');
 
 
 var app = express();
@@ -27,5 +28,6 @@ app.use('/kortti', korttiRouter);
 app.use('/tili', tiliRouter);
 app.use('/tapahtumat', tapahtumatRouter);
 app.use('/login', loginRouter);
+app.use('/kamera', kameraRouter);
 
 module.exports = app;
