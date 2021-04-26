@@ -55,7 +55,8 @@ void MainWindow::kirjauduUlos()
 
 void MainWindow::on_pushButton_clicked()
 {
-    pdllm->pinAloitus();
+   // pdllm->pinAloitus();
+    pdllm->kameraAloitus();
 }
 
 void MainWindow::receiveDataFromSerial(QString)
