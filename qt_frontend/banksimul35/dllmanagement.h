@@ -42,6 +42,7 @@ private:
     Pindll *ppindll;
     Kameradll *pkameradll;
     menu *pmenu;
+    QTimer *timer;
     ilmoitus *pilmoitus;
     nosto *pnosto;
     saldo *psaldo;
@@ -62,6 +63,7 @@ public slots:
     void receiveMenuTimer();
     void receiveNostaTimerFromIlmoitus();
     void receivePathFromKameradll(QString);
+    void ilmoitusTimer();
 
 };
 

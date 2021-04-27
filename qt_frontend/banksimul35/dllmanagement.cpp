@@ -6,6 +6,7 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
     pDllserialport = new Dllserialport;
     ppindll = new Pindll;
     pkameradll = new Kameradll;
+    timer = new QTimer(this);
 
     pmenu = new menu;
     pilmoitus = new ilmoitus;
@@ -47,6 +48,8 @@ dllmanagement::dllmanagement(QObject *parent) : QObject(parent)
             this, SLOT(receiveKirjauduUlosFromMenu()));
     connect(pkameradll, SIGNAL(sendPathToExe(QString)),
             this, SLOT(receivePathFromKameradll(QString)));
+    connect(timer, &QTimer::timeout,
+            this, QOverload<>::of(&dllmanagement::ilmoitusTimer));
 }
 
 dllmanagement::~dllmanagement()
@@ -59,6 +62,8 @@ dllmanagement::~dllmanagement()
     ppindll = nullptr;
     delete pkameradll;
     pkameradll = nullptr;
+    delete timer;
+    timer = nullptr;
     delete pmenu;
     pmenu = nullptr;
     delete pilmoitus;
@@ -136,6 +141,7 @@ void dllmanagement::receiveTiedotFromRestapi(QNetworkReply *reply)
         else
         {
             pilmoitus->lukossaIlmoitus();
+            timer->start(10000);
         }
 
         pkameradll->otaKuva();
@@ -228,6 +234,7 @@ void dllmanagement::receiveLukittuFromPindll()
 {
     pDllrestapi->sendLukitus(korttinumero);
     pilmoitus->lukittuIlmoitus();
+    timer->start(10000);
 }
 
 void dllmanagement::receiveDataFromSerialport(QString korttinumeroSerial)
@@ -304,4 +311,9 @@ void dllmanagement::receiveNostaTimerFromIlmoitus()
 void dllmanagement::receivePathFromKameradll(QString path)
 {
     pDllrestapi->sendKameraPath(path);
+}
+
+void dllmanagement::ilmoitusTimer()
+{
+    pDllserialport->portinAvaus();
 }
